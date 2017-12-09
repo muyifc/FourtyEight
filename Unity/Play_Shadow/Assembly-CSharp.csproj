@@ -125,6 +125,7 @@
      <Compile Include="Assets\Scripts\Core\PlotManager.cs" />
      <Compile Include="Assets\Scripts\Core\RolerController.cs" />
      <Compile Include="Assets\Scripts\Core\SceneManager.cs" />
+     <Compile Include="Assets\Scripts\Data.cs" />
      <Compile Include="Assets\Scripts\Gamer.cs" />
      <Compile Include="Assets\Scripts\Logic\HomeLayer.cs" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_Grab.shader" />
