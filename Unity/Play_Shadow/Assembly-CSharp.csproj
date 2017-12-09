@@ -118,6 +118,7 @@
      <Compile Include="Assets\iTweenEditor\iTweenPath.cs" />
      <Compile Include="Assets\Scripts\Common\EventTriggerListener.cs" />
      <Compile Include="Assets\Scripts\Common\Singleton.cs" />
+     <Compile Include="Assets\Scripts\Common\Timer.cs" />
      <Compile Include="Assets\Scripts\Core\CollectEntity.cs" />
      <Compile Include="Assets\Scripts\Core\ItemEntity.cs" />
      <Compile Include="Assets\Scripts\Core\LayerManager.cs" />

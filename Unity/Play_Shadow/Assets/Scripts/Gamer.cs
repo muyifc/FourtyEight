@@ -15,11 +15,17 @@ public class Gamer : MonoBehaviour
 
         this.StartGame();
     }
-
+    void Update()
+    {
+        Timer.Update();
+    }
 
     //	开始游戏的处理
     public void StartGame()
     {
+        Timer timer1 = new Timer(3, () => { Debug.Log("alwaysDo"); }, () => { Debug.Log("stopTimer1"); }, true);//每帧执行，到点停止
+        Timer timer2 = new Timer(5, () => { Debug.Log("noAlways"); }, () => { Debug.Log("stopTimer2"); }, false);//到点执行
+
         Debug.Log(Data.Instance.storty_1);
         LayerManager<HomeLayer>.Open("HomeLayer");
         Gamer.Instance.StartLevel(1);
