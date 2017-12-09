@@ -116,6 +116,7 @@
      <Compile Include="Assets\iTweenEditor\iTween.cs" />
      <Compile Include="Assets\iTweenEditor\iTweenEvent.cs" />
      <Compile Include="Assets\iTweenEditor\iTweenPath.cs" />
+     <Compile Include="Assets\Scripts\Common\CommFun.cs" />
      <Compile Include="Assets\Scripts\Common\CommLang.cs" />
      <Compile Include="Assets\Scripts\Common\EventTriggerListener.cs" />
      <Compile Include="Assets\Scripts\Common\Singleton.cs" />

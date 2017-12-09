@@ -13,7 +13,8 @@ public class Gamer : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
 
-        this.StartGame();
+		this.PlayStory ();
+        //this.StartGame();
     }
 
 
@@ -29,7 +30,7 @@ public class Gamer : MonoBehaviour
     //片头
     public void PlayStory()
     {
-
+		LayerManager<HomeLayer>.Open("PlotPanel");
     }
     //控制关卡流程
     public void StartLevel(int levelID)
