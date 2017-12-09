@@ -20,8 +20,8 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     RectTransform canvasRect;
 
 
-    public float max_rect = 1000;
-    public float min_rect = -1000;
+    // public float max_rect = 1000;
+    // public float min_rect = -1000;
     Vector3 newPos;
     float shadowScale;
 
@@ -33,7 +33,7 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     }
     void Start()
     {
-        mAnim = transform.GetComponent<Animation>();
+        // mAnim = transform.GetComponent<Animation>();
         shadowScale = 100.0f / Vector3.Distance(transform.position, Camera.main.transform.position);
 
         // Debug.Log(shadowScale);
@@ -59,6 +59,10 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public void OnEndDrag(PointerEventData eventData)
     {
         SetDragObjPostion(eventData);
+        if (SceneManager.Instance.MatchFun(this.mShadow))
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
 
@@ -72,7 +76,7 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         {
             if (isDrag)
             {
-                newPos = new Vector3(mouseWorldPosition.x + offset.x, rect.position.y, rect.position.z);
+                newPos = new Vector3(mouseWorldPosition.x + offset.x, mouseWorldPosition.y + offset.y, rect.position.z);
                 JudgeRectRange();
             }
             else
@@ -86,7 +90,14 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         }
 
         //动态监测
-        SceneManager.Instance.CheckMatching(this.transform);
+        if (SceneManager.Instance.CheckMatching(this.mShadow))
+        {
+            this.transform.localScale = Vector3.one * 1.5f;
+        }
+        else
+        {
+            this.transform.localScale = Vector3.one;
+        }
     }
 
     void JudgeRectRange()
@@ -94,10 +105,10 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         // Debug.Log(newPos+"//"+Camera.main.WorldToScreenPoint(newPos));
         rect.position = newPos;
 
-        if (rect.localPosition.x < min_rect)
-            rect.localPosition = new Vector3(min_rect, rect.localPosition.y, rect.localPosition.z);
-        else if (rect.localPosition.x > max_rect)
-            rect.localPosition = new Vector3(max_rect, rect.localPosition.y, rect.localPosition.z);
+        // if (rect.localPosition.x < min_rect)
+        //     rect.localPosition = new Vector3(min_rect, rect.localPosition.y, rect.localPosition.z);
+        // else if (rect.localPosition.x > max_rect)
+        //     rect.localPosition = new Vector3(max_rect, rect.localPosition.y, rect.localPosition.z);
 
         Vector3 pos = transform.position - targetOffset;
         mShadow.position = new Vector3(pos.x * shadowScale, pos.y * shadowScale, pos.z);
@@ -105,11 +116,11 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     void Update()
     {
-        if (mAnim.isPlaying)
-        {
-            Vector3 pos = transform.position - targetOffset;
-            mShadow.position = new Vector3(pos.x * shadowScale, pos.y * shadowScale, pos.z);
-        }
+        // if (mAnim.isPlaying)
+        // {
+        //     Vector3 pos = transform.position - targetOffset;
+        //     mShadow.position = new Vector3(pos.x * shadowScale, pos.y * shadowScale, pos.z);
+        // }
     }
 
 }

@@ -9,6 +9,8 @@ public class SceneManager : MonoBehaviour
     public GameObject CommonLight;
     public GameObject FireLight;
 
+    public GameObject CommonBG;
+
 
     private List<iTweenPath> curLevelPathList = new List<iTweenPath>();//路径
     private GameObject curSceneLayer;//地图背景
@@ -16,6 +18,7 @@ public class SceneManager : MonoBehaviour
     private List<GameObject> curCollectionList = new List<GameObject>();//拾取物
 
 
+    private int curLevelID;
     private int curPassLevelPart;//当前处于关卡第几段
     private Vector3 curRightPos;//正确摆放位置
     private Vector3 curRightEuler;//正确摆放角度
@@ -26,13 +29,17 @@ public class SceneManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
+        CommonBG.SetActive(true);
     }
 
     //关卡生成
     public void SwitchLevel(int levelID)
     {
-        int levelPartCount = 1;//读表
-        curPassLevelPart = 1;
+        curLevelID = levelID;
+        int levelPartCount = Data.Instance.partCountPerLevel[curLevelID - 1];//读表
+        curPassLevelPart = 0;
+        this.SwitchLevelPart();
+
         //销毁上个场景
         if (curSceneLayer != null)
             GameObject.Destroy(curSceneLayer);
@@ -45,24 +52,24 @@ public class SceneManager : MonoBehaviour
 
 
         //加载场景（图层）
-        curSceneLayer = Instantiate(Resources.Load("Scene_" + levelID)) as GameObject;
+        curSceneLayer = Instantiate(Resources.Load("Scene_" + curLevelID)) as GameObject;
         curSceneLayer.transform.SetParent(this.transform, false);
         // sceneLayer.transform.localPosition = Vector3.zero;
-        curSceneLayer.transform.localScale = Vector3.one * 10;
+        curSceneLayer.transform.localScale = Vector3.one;
         // sceneLayer.transform.localEulerAngles = Vector3.zero;
 
         //加载该场景的AI路径（itweenpath）
         curLevelPathList.Clear();
         for (int levelPart = 1; levelPart <= levelPartCount; levelPart++)
         {
-            GameObject pathObj = Instantiate(Resources.Load("Path_" + levelID + "_" + levelPart)) as GameObject;
+            GameObject pathObj = Instantiate(Resources.Load("Path_" + curLevelID + "_" + levelPart)) as GameObject;
             curLevelPathList.Add(pathObj.GetComponent<iTweenPath>());
         }
 
         //加载主角
         roler = Instantiate(Resources.Load("Roler")) as GameObject;
         roler.transform.SetParent(this.transform, false);
-        // roler.transform.localPosition = Vector3.zero;//位置读表
+        roler.transform.localPosition = Data.Instance.rolerBornPos_1;//位置读表
 
         //加载拾取物
         int collectionNum = 2;//读表
@@ -72,22 +79,50 @@ public class SceneManager : MonoBehaviour
 
     }
 
+    //下一段路
+    public void SwitchLevelPart()
+    {
+        curPassLevelPart++;
+        //通关
+        if (curPassLevelPart > Data.Instance.partCountPerLevel[this.curLevelID - 1])
+        {
+            Debug.Log("通关");
+            return;
+        }
+        if (this.curLevelID == 1)
+        {
+            this.curRightPos = Data.Instance.collectPosDirtyArray_1[0];
+
+        }
+
+    }
+
 
 
     //检测摆放是否正确
-    public void CheckMatching(Transform tran)
+    public bool CheckMatching(Transform tran)
     {
-        bool match = false;
+        bool isMatch = false;
         //匹配正确
-        if (match)
-        {
-            curPassLevelPart++;
+        float dis = Vector3.Distance(tran.localPosition, this.curRightPos);
+        if (dis < 30)
+            isMatch = true;
+        //    Debug.Log(dis);
+        return isMatch;
+    }
 
+    public bool MatchFun(Transform tran)
+    {
+        bool isMatch = this.CheckMatching(tran);
+        if (isMatch)
+        {
             //将物品强行拉扯到设定位置
             // tran.position
-
+            Debug.Log(this.curLevelPathList.Count + "//" + curPassLevelPart);
             //主角寻路
             RolerController.Instance.AutoMove(this.curLevelPathList[curPassLevelPart - 1]);
         }
+
+        return isMatch;
     }
 }
