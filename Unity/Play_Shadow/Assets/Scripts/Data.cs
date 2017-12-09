@@ -19,14 +19,8 @@ public class Data : Singleton<Data>
     public string[] matchItemNameArray_1 = new string[] { "HuaBi", "ShaoZi" };
 
 
-
     public Vector3[] collectPosDirtyArray_2 = new Vector3[] { new Vector3(1f, 2f, 3f), new Vector3(12f, 2f, 1f) };
     public Vector3[] collectPosDirtyArray_3 = new Vector3[] { new Vector3(1f, 2f, 3f), new Vector3(12f, 2f, 1f) };
-
-
-
-
-
 
 	//剧情
 	public string PlotDesc1 = "我看不到自己，却只有在篝火的映照下才能感受到自己微弱的存在。";
