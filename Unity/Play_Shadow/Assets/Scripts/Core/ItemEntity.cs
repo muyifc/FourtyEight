@@ -31,10 +31,12 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         // mAnim.Play("drop");
     }
-    void Awake()
+    void Start()
     {
         mAnim = transform.GetComponent<Animation>();
         shadowScale = 100.0f / Vector3.Distance(transform.position, Camera.main.transform.position);
+
+        // Debug.Log(shadowScale);
 
         rect = this.GetComponent<RectTransform>();
         canvasRect = transform.root.GetComponent<RectTransform>();
