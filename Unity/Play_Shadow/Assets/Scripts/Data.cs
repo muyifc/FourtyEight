@@ -29,8 +29,8 @@ public class Data : Singleton<Data>
 	
 
 	public string PlotIcon1 = "Image/plot1";
-	public string PlotIcon2 = "Image/2";
-	public string PlotIcon3 = "Image/3";
+	public string PlotIcon2 = "Image/plot2";
+	public string PlotIcon3 = "Image/plot3";
 	
 
 }

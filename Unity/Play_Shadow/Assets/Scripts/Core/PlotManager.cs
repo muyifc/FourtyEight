@@ -51,6 +51,7 @@ public class PlotManager : MonoBehaviour {
 		
 		desc.text = descList [curId];
 		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
+		image.SetNativeSize ();
 	}
 
 	public void NextPlot(){

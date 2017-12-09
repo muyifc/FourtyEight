@@ -19,7 +19,7 @@ public class CommFun  {
 	}
 
 	public Sprite LoadImage(string path){
-		path = string.Format("Assets/Art/{0}.jpg",path);
+		path = string.Format("Assets/Art/{0}.png",path);
 		Texture2D tex = getAsset(path) as Texture2D;
 		if(tex == null) {
 			return null;
