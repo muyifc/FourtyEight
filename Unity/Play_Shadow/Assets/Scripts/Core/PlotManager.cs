@@ -48,7 +48,28 @@ public class PlotManager : MonoBehaviour {
 	}
 
 	public void ShowStory(){
-		
+		//		CanvasGroup canvas = getResourceBg.transform.GetComponent<CanvasGroup> ();
+		//		canvas.alpha = 1;
+		//		getResourceBg.gameObject.SetActive (true);
+		//		float posY = getResource.transform.localPosition.y;
+		//		Sequence mySeq = DOTween.Sequence ();
+		//		mySeq.AppendInterval (0.5f);
+		//		mySeq.Append (getResource.transform.DOLocalMoveY( posY + 200,0.3f));
+		//		mySeq.Join (DOTween.To (
+		//			() => {
+		//				return canvas.alpha;
+		//			},
+		//			x => {
+		//				canvas.alpha = x;	
+		//			}, 0, 0.2f));
+		//		mySeq.AppendCallback (() => {
+		//			canvas.alpha = 0;
+		//			showTipObj.SetActive (false);
+		//			getResource.transform.localPosition = new Vector3(getResource.transform.localPosition.x, posY, 0);
+		//		});
+
+
+
 		desc.text = descList [curId];
 		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
 		image.SetNativeSize ();
