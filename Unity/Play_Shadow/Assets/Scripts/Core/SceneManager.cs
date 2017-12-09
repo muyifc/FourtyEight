@@ -104,6 +104,10 @@ public class SceneManager : MonoBehaviour
             this.curRightPos = Data.Instance.matchPosArray_2[curPassLevelPart - 1];
             this.curRightEuler = Data.Instance.matchEulerArray_2[curPassLevelPart - 1];
             this.curItemEntityName = Data.Instance.matchItemNameArray_2[curPassLevelPart - 1];
+        }else if (this.curLevelID == 3){
+            this.curRightPos = Data.Instance.matchPosArray_3[curPassLevelPart - 1];
+            this.curRightEuler = Data.Instance.matchEulerArray_3[curPassLevelPart - 1];
+            this.curItemEntityName = Data.Instance.matchItemNameArray_3[curPassLevelPart - 1];
         }
 
     }
@@ -116,10 +120,10 @@ public class SceneManager : MonoBehaviour
         bool isMatch = false;
         //匹配正确
         float dis = Vector3.Distance(shadowTran.localPosition, this.curRightPos);
-        float angle = Mathf.Abs(shadowTran.localEulerAngles.z - this.curRightEuler);
+        float angle = (Mathf.Abs(shadowTran.localEulerAngles.z - this.curRightEuler)+360) % 360;
         if (dis < 60 && angle < 20 && shadowTran.name.Equals(this.curItemEntityName))
             isMatch = true;
-        Debug.Log(dis + "//" + angle);
+        Debug.Log("checkMatch:"+shadowTran.name+"//"+dis + "//" + angle);
         return isMatch;
     }
 
