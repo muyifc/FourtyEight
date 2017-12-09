@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D7AF0810-6AE2-EEC1-4ED7-F0912CB9DF38}</ProjectGuid>
+    <ProjectGuid>{9A9E4F6A-98B7-551E-243F-61EC7332697C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -123,6 +123,7 @@
      <Compile Include="Assets\Scripts\Core\LayerManager.cs" />
      <Compile Include="Assets\Scripts\Core\RolerController.cs" />
      <Compile Include="Assets\Scripts\Core\SceneManager.cs" />
+     <Compile Include="Assets\Scripts\Data.cs" />
      <Compile Include="Assets\Scripts\Gamer.cs" />
      <Compile Include="Assets\Scripts\Logic\HomeLayer.cs" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_Grab.shader" />

@@ -20,6 +20,7 @@ public class Gamer : MonoBehaviour
     //	开始游戏的处理
     public void StartGame()
     {
+        Debug.Log(Data.Instance.storty_1);
         LayerManager<HomeLayer>.Open("HomeLayer");
         Gamer.Instance.StartLevel(1);
 
