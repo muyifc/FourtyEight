@@ -13,6 +13,7 @@ public class RolerController : MonoBehaviour
 
     public void AutoMove(iTweenPath path)
     {       
+        Debug.Log("GO");
         Hashtable args = new Hashtable();
 
         args.Add("path", iTweenPath.GetPath(path.pathName));
@@ -42,6 +43,7 @@ public class RolerController : MonoBehaviour
     void AnimationEnd(string f)
     {
         Debug.Log("end : " + f);
+        SceneManager.Instance.SwitchLevelPart();
     }
 
 }
