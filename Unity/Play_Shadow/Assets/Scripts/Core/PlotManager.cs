@@ -115,16 +115,17 @@ public class PlotManager : MonoBehaviour {
 		Debug.Log ("!!!!!!!!!!NextPlot");
 		curId++;
 		if (curId >= descList.Count) {
-			//继续游戏
-			Gamer.Instance.StartGame();
-			Destroy (gameObject);
-			//return;
+			Close ();
 		} else {
 			ShowStory ();
 		}
 	}
 
-
+	public void Close(){
+		//继续游戏
+		Gamer.Instance.StartGame();
+		Destroy (gameObject);
+	}
 	
 	// Update is called once per frame
 	void Update () {
