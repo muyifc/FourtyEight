@@ -67,8 +67,8 @@ public class LevelLayer : LayerManager<LevelLayer>
         {
             if (curStatu == ItemStatu.Rotate)
             {
-                float m_fDeltaX = Input.GetAxis("Mouse X") * Time.deltaTime * 100;
-                float m_fDeltaY = Input.GetAxis("Mouse Y") * Time.deltaTime * 100;
+                float m_fDeltaX = Input.GetAxis("Mouse X") * Time.deltaTime * 150;
+                float m_fDeltaY = Input.GetAxis("Mouse Y") * Time.deltaTime * 150;
                 this.targetItem.transform.Rotate(new Vector3(0, 0, m_fDeltaX + m_fDeltaY), Space.Self);
                 this.targetItem.update();
             }

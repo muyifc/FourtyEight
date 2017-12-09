@@ -12,14 +12,17 @@ public class CollectEntity : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        //被拾取
+        //Debug.Log(Vector3.Distance(transform.position, RolerController.Instance.transform.position));
+        if (Vector3.Distance(transform.position, RolerController.Instance.transform.position) < 10)
+        {
+            TimeEntity.Instance.ResetTime();
+            GameObject.Destroy(this.gameObject);
+        }
+    }
 
-    //被拾取
-    // void OnTriggerEnter2D(Collider other)
-    // {
-    //     // Destroy(gameObject);
-
-
-    // }
 
 
 

@@ -58,12 +58,16 @@
      <Compile Include="Assets\DragonBones\Editor\UnityEditor.cs" />
      <Compile Include="Assets\iTweenEditor\Editor\iTweenEventDataEditor.cs" />
      <Compile Include="Assets\iTweenEditor\Editor\iTweenPathEditor.cs" />
+     <None Include="Assets\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_Grab.shader" />
      <None Include="Assets\iTweenEditor\README.txt" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_UIFramebuffer.shader" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_UIGrab.shader" />
      <None Include="Assets\DragonBones\Demos\Scripts\LightTestShader.shader" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_Framebuffer.shader" />
+     <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>D:/Program Files/Unity20170101/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -120,6 +124,21 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>D:/Program Files/Unity20170101/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

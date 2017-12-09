@@ -127,16 +127,21 @@
      <Compile Include="Assets\Scripts\Core\PlotManager.cs" />
      <Compile Include="Assets\Scripts\Core\RolerController.cs" />
      <Compile Include="Assets\Scripts\Core\SceneManager.cs" />
+     <Compile Include="Assets\Scripts\Core\TimeEntity.cs" />
      <Compile Include="Assets\Scripts\Data.cs" />
      <Compile Include="Assets\Scripts\Gamer.cs" />
      <Compile Include="Assets\Scripts\Logic\HomeLayer.cs" />
      <Compile Include="Assets\Scripts\Logic\LevelLayer.cs" />
+     <None Include="Assets\Demigiant\DOTween\readme.txt" />
+     <None Include="Assets\Demigiant\DOTween\DOTween50.xml" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_Grab.shader" />
      <None Include="Assets\iTweenEditor\README.txt" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_UIFramebuffer.shader" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_UIGrab.shader" />
      <None Include="Assets\DragonBones\Demos\Scripts\LightTestShader.shader" />
      <None Include="Assets\DragonBones\Resources\Shaders\DB_BlendMode_Framebuffer.shader" />
+     <None Include="Assets\Demigiant\DOTween\DOTween43.xml" />
+     <None Include="Assets\Demigiant\DOTween\DOTween46.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity20170101/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -157,6 +162,18 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>D:/Program Files/Unity20170101/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>D:/Game24/FourtyEight/Unity/Play_Shadow/Assets/Demigiant/DOTween/DOTween46.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
