@@ -7,87 +7,69 @@ using UnityEngine.EventSystems;
 //前景物件
 //拖拽、选装等
 [RequireComponent(typeof(RectTransform))]
-public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class ItemEntity : MonoBehaviour
 {
+    public bool isCanMove = true;
+
     public Transform mShadow;
-    private Vector3 targetOffset;
-    private SpriteRenderer[] mChildRenderer;
-
-    private bool isDrag = false;
-    //偏移量
-    private Vector3 offset = Vector3.zero;
-    RectTransform rect;
-    RectTransform canvasRect;
 
 
-    // public float max_rect = 1000;
-    // public float min_rect = -1000;
-    Vector3 newPos;
-    float shadowScale;
 
-    Animation mAnim;
-
-    void OnEnable()
-    {
-        // mAnim.Play("drop");
-    }
     void Start()
     {
-        // mAnim = transform.GetComponent<Animation>();
-        shadowScale = 100.0f / Vector3.Distance(transform.position, Camera.main.transform.position);
+        if (this.mShadow != null)
+            this.transform.localPosition = mShadow.localPosition + Data.Instance.shadowOffset;
+        if (!isCanMove)
+            this.enabled = false;
 
-        // Debug.Log(shadowScale);
-
-        rect = this.GetComponent<RectTransform>();
-        canvasRect = transform.root.GetComponent<RectTransform>();
-
-        targetOffset = transform.position - mShadow.position;
-        mChildRenderer = transform.GetComponentsInChildren<SpriteRenderer>();
+        EventTriggerListener.Get(this.gameObject).onClick = SelectEvent;
+        mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;
     }
+    private void SelectEvent(GameObject go)
+    {
+        LevelLayer.Instance.ShowMenu(this);
+    }
+
+    public void update()
+    {
+        mShadow.localEulerAngles = transform.localEulerAngles;
+        mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;
+        //动态监测
+        if (SceneManager.Instance.CheckMatching(this.mShadow))
+        {
+            this.transform.localScale = Vector3.one * 1.2f;
+        }
+        else
+        {
+            this.transform.localScale = Vector3.one;
+        }
+    }
+
+    public void Reset()
+    {
+        if (SceneManager.Instance.MatchFun(this.mShadow))
+            this.gameObject.SetActive(false);
+    }
+    /* 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("OnBeginDrag");
+        if (curStatu == ItemStatu.None)
+        {
+            LevelLayer.Instance.ShowMenu(this);
+            return;
+        }
+
         isDrag = false;
         SetDragObjPostion(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (curStatu == ItemStatu.None)
+            return;
         isDrag = true;
         SetDragObjPostion(eventData);
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        SetDragObjPostion(eventData);
-        if (SceneManager.Instance.MatchFun(this.mShadow))
-        {
-            this.gameObject.SetActive(false);
-        }
-    }
-
-
-
-    void SetDragObjPostion(PointerEventData eventData)
-    {
-        Vector3 mouseWorldPosition;
-
-        //判断是否点到UI图片上的时候
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, eventData.position, eventData.pressEventCamera, out mouseWorldPosition))
-        {
-            if (isDrag)
-            {
-                newPos = new Vector3(mouseWorldPosition.x + offset.x, mouseWorldPosition.y + offset.y, rect.position.z);
-                JudgeRectRange();
-            }
-            else
-            {
-                //计算偏移量                
-                offset = rect.position - mouseWorldPosition;
-            }
-
-            //直接赋予position点到的时候回跳动
-            //rect.position = mouseWorldPosition;
-        }
 
         //动态监测
         if (SceneManager.Instance.CheckMatching(this.mShadow))
@@ -100,7 +82,58 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         }
     }
 
-    void JudgeRectRange()
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (curStatu == ItemStatu.None)
+            return;
+        SetDragObjPostion(eventData);
+    }
+
+
+
+    void SetDragObjPostion(PointerEventData eventData)
+    {
+        Vector3 mouseWorldPosition;
+
+        //判断是否点到UI图片上的时候
+        if (this.curStatu == ItemStatu.Drag)
+        {
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, eventData.position, eventData.pressEventCamera, out mouseWorldPosition))
+            {
+                if (isDrag)
+                {
+                    newPos = new Vector3(mouseWorldPosition.x + offset.x, mouseWorldPosition.y + offset.y, rect.position.z);
+                    ResetPos();
+                }
+                else
+                {
+                    //计算偏移量                
+                    offset = rect.position - mouseWorldPosition;
+                }
+            }
+        }
+        else if (this.curStatu == ItemStatu.Rotate)
+        {
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rect, eventData.position, eventData.pressEventCamera, out mouseWorldPosition))
+            {
+                if (isDrag)
+                {
+                    Vector3 dir = mouseWorldPosition - offset;
+                    Debug.Log(dir);
+                    newAngle = dir.x;
+                    ResetAngle();
+                }
+                else
+                {
+                    offset = mouseWorldPosition;
+                }
+            }
+        }
+
+
+    }
+
+    void ResetPos()
     {
         // Debug.Log(newPos+"//"+Camera.main.WorldToScreenPoint(newPos));
         rect.position = newPos;
@@ -114,13 +147,13 @@ public class ItemEntity : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         mShadow.position = new Vector3(pos.x * shadowScale, pos.y * shadowScale, pos.z);
     }
 
-    void Update()
+    void ResetAngle()
     {
-        // if (mAnim.isPlaying)
-        // {
-        //     Vector3 pos = transform.position - targetOffset;
-        //     mShadow.position = new Vector3(pos.x * shadowScale, pos.y * shadowScale, pos.z);
-        // }
+        rect.localEulerAngles = new Vector3(0, 0, newAngle);
+        mShadow.localEulerAngles = rect.localEulerAngles;
     }
+
+    */
+
 
 }

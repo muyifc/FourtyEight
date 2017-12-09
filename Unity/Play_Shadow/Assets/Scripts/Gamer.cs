@@ -13,7 +13,7 @@ public class Gamer : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
 
-		this.PlayStory ();
+        this.PlayStory();
         //this.StartGame();
     }
     void Update()
@@ -24,11 +24,12 @@ public class Gamer : MonoBehaviour
     //	开始游戏的处理
     public void StartGame()
     {
-        Timer timer1 = new Timer(3, () => { Debug.Log("alwaysDo"); }, () => { Debug.Log("stopTimer1"); }, true);//每帧执行，到点停止
-        Timer timer2 = new Timer(5, () => { Debug.Log("noAlways"); }, () => { Debug.Log("stopTimer2"); }, false);//到点执行
+        // Timer timer1 = new Timer(3, () => { Debug.Log("alwaysDo"); }, () => { Debug.Log("stopTimer1"); }, true);//每帧执行，到点停止
+        // Timer timer2 = new Timer(5, () => { Debug.Log("noAlways"); }, () => { Debug.Log("stopTimer2"); }, false);//到点执行
 
         Debug.Log(Data.Instance.storty_1);
-        LayerManager<HomeLayer>.Open("HomeLayer");
+        // LayerManager<HomeLayer>.Open("HomeLayer");
+        // HomeLayer.Open("HomeLayer");
         Gamer.Instance.StartLevel(1);
 
     }
@@ -36,13 +37,14 @@ public class Gamer : MonoBehaviour
     //片头
     public void PlayStory()
     {
-		LayerManager<HomeLayer>.Open("PlotPanel");
+        LayerManager<HomeLayer>.Open("PlotPanel");
     }
     //控制关卡流程
     public void StartLevel(int levelID)
     {
         //生成场景
         SceneManager.Instance.SwitchLevel(levelID);
+        LevelLayer.Open("LevelLayer");
         //
 
     }

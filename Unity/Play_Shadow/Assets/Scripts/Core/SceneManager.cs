@@ -21,8 +21,8 @@ public class SceneManager : MonoBehaviour
     private int curLevelID;
     private int curPassLevelPart;//当前处于关卡第几段
     private Vector3 curRightPos;//正确摆放位置
-    private Vector3 curRightEuler;//正确摆放角度
-    private GameObject curItemEntityName;//需要摆放的物品
+    private float curRightEuler;//正确摆放角度
+    private string curItemEntityName;//需要摆放的物品
 
     public static SceneManager Instance;
     void Awake()
@@ -91,8 +91,9 @@ public class SceneManager : MonoBehaviour
         }
         if (this.curLevelID == 1)
         {
-            this.curRightPos = Data.Instance.collectPosDirtyArray_1[0];
-
+            this.curRightPos = Data.Instance.matchPosArray_1[curPassLevelPart - 1];
+            this.curRightEuler = Data.Instance.matchEulerArray_1[curPassLevelPart - 1];
+            this.curItemEntityName = Data.Instance.matchItemNameArray_1[curPassLevelPart - 1];
         }
 
     }
@@ -100,24 +101,26 @@ public class SceneManager : MonoBehaviour
 
 
     //检测摆放是否正确
-    public bool CheckMatching(Transform tran)
+    public bool CheckMatching(Transform shadowTran)
     {
         bool isMatch = false;
         //匹配正确
-        float dis = Vector3.Distance(tran.localPosition, this.curRightPos);
-        if (dis < 30)
+        float dis = Vector3.Distance(shadowTran.localPosition, this.curRightPos);
+        float angle = Mathf.Abs(shadowTran.localEulerAngles.z - this.curRightEuler);
+        if (dis < 30 && angle < 20 && shadowTran.name.Equals(this.curItemEntityName))
             isMatch = true;
-        //    Debug.Log(dis);
+        Debug.Log(dis + "//" + angle);
         return isMatch;
     }
 
-    public bool MatchFun(Transform tran)
+    public bool MatchFun(Transform shadowTran)
     {
-        bool isMatch = this.CheckMatching(tran);
+        bool isMatch = this.CheckMatching(shadowTran);
         if (isMatch)
         {
             //将物品强行拉扯到设定位置
-            // tran.position
+            shadowTran.localPosition = this.curRightPos;
+            shadowTran.localEulerAngles = new Vector3(shadowTran.localEulerAngles.x, shadowTran.localEulerAngles.y, this.curRightEuler);
             Debug.Log(this.curLevelPathList.Count + "//" + curPassLevelPart);
             //主角寻路
             RolerController.Instance.AutoMove(this.curLevelPathList[curPassLevelPart - 1]);

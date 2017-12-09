@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4532796856106984}
   - component: {fileID: 114742647002278668}
   m_Layer: 0
-  m_Name: Path_1_1
+  m_Name: Path_1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1925830325247440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -30.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,11 +51,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 270638c3dd2904f79b4f91fb3b56d369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Path_1_1
+  pathName: Path_1_2
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   nodes:
-  - {x: -76.876724, y: 26.245947, z: 90}
-  - {x: -23.3575, y: 22.678736, z: 90}
-  nodeCount: 2
+  - {x: -23.3575, y: 22.414845, z: 90}
+  - {x: -3.9569788, y: 22.270086, z: 90}
+  - {x: 3.0909424, y: 14.847101, z: 90}
+  - {x: 31.612549, y: 1.0418167, z: 90}
+  - {x: 45.00416, y: 1.3036346, z: 90}
+  - {x: 54.69388, y: -5.562134, z: 90}
+  - {x: 57.10404, y: -9.826405, z: 90}
+  - {x: 64.149315, y: -10.382565, z: 90}
+  nodeCount: 8
   initialized: 1
   initialName: New Path 2

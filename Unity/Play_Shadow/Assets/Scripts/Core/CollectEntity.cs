@@ -14,12 +14,12 @@ public class CollectEntity : MonoBehaviour
 
 
     //被拾取
-    void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
+    // void OnTriggerEnter2D(Collider other)
+    // {
+    //     // Destroy(gameObject);
 
 
-    }
+    // }
 
 
 

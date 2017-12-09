@@ -12,12 +12,14 @@ public class RolerController : MonoBehaviour
     }
 
     public void AutoMove(iTweenPath path)
-    {       
+    {
         Debug.Log("GO");
         Hashtable args = new Hashtable();
+        // args.Add("axis", "x");
+        // args.Add("axis", "y");
 
         args.Add("path", iTweenPath.GetPath(path.pathName));
-        args.Add("easeType", iTween.EaseType.linear); 
+        args.Add("easeType", iTween.EaseType.linear);
         args.Add("movetopath", false);
         args.Add("speed", 50f);
 

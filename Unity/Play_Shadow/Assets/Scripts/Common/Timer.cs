@@ -23,13 +23,27 @@ public class Timer
         oldTime = Time.time;
         flag = alwaysDO;
         OnStart();
+        for (int idx = 0; idx < timerList.Count; idx++)
+        {
+            if (timerList[idx] == null)
+            {
+                timerList[idx] = this;
+                return;
+            }
+        }
         timerList.Add(this);
     }
 
     public static void Update()
     {
-        foreach (var timer in timerList)
-            timer.update();
+        for (int idx = 0; idx < timerList.Count; idx++)
+        {
+            if (timerList[idx] != null)
+            {
+                timerList[idx].update();
+            }
+        }
+
     }
 
     public float getOldTime() { return oldTime; }
@@ -62,6 +76,8 @@ public class Timer
         {
             oldTime = -1;
             OnEnd();
+            int idx = timerList.IndexOf(this);
+            timerList[idx] = null;
         }
     }
 
