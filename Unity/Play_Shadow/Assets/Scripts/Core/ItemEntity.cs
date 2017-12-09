@@ -7,30 +7,76 @@ using UnityEngine.EventSystems;
 //前景物件
 //拖拽、选装等
 [RequireComponent(typeof(RectTransform))]
-public class ItemEntity : MonoBehaviour
+public class ItemEntity : MonoBehaviour, IDragHandler,IEndDragHandler
 {
-    public bool isCanMove = true;
+    public bool isCanMove = false;
+    public bool isCanRotate = false;
 
     public Transform mShadow;
 
 
 
+    //update
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (isCanRotate)
+            SetDraggedRotation(eventData);
+        if (isCanMove)
+            SetDraggedPosition(eventData);
+
+        this.Refresh();
+    }
+    //旋转图片
+    private void SetDraggedRotation(PointerEventData eventData)
+    {
+        Vector2 curScreenPosition = RectTransformUtility.WorldToScreenPoint(eventData.pressEventCamera, transform.position);
+        Vector2 directionTo = curScreenPosition - eventData.position;
+        Vector2 directionFrom = directionTo - eventData.delta;
+        this.transform.rotation *= Quaternion.FromToRotation(directionTo, directionFrom);
+    }
+    //拖动图片
+    private void SetDraggedPosition(PointerEventData eventData)
+    {
+        var rt = gameObject.GetComponent<RectTransform>();
+        Vector3 globalMousePos;
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rt, eventData.position,
+        eventData.pressEventCamera, out globalMousePos))
+        {
+            rt.position = globalMousePos;
+        }
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Debug.Log("OnEndDrag");
+        if (SceneManager.Instance.MatchFun(this.mShadow))
+        {
+            // this.gameObject.SetActive(false);
+            isCanRotate = false;
+            isCanMove = false;
+        }
+    }
+
+
     void Start()
     {
         if (this.mShadow != null)
+        {
             this.transform.localPosition = mShadow.localPosition + Data.Instance.shadowOffset;
-        if (!isCanMove)
+            transform.localEulerAngles = mShadow.localEulerAngles;
+        }
+        if (!isCanMove && !isCanRotate)
             this.enabled = false;
 
-        EventTriggerListener.Get(this.gameObject).onClick = SelectEvent;
-        mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;
+        // EventTriggerListener.Get(this.gameObject).onClick = SelectEvent;
+        // mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;
     }
-    private void SelectEvent(GameObject go)
-    {
-        LevelLayer.Instance.ShowMenu(this);
-    }
+    // private void SelectEvent(GameObject go)
+    // {
+    //     LevelLayer.Instance.ShowMenu(this);
+    // }
 
-    public void update()
+    void Refresh()
     {
         mShadow.localEulerAngles = transform.localEulerAngles;
         mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;

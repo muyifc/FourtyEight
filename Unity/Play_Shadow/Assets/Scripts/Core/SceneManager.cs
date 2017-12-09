@@ -69,12 +69,7 @@ public class SceneManager : MonoBehaviour
         //加载主角
         roler = Instantiate(Resources.Load("Roler")) as GameObject;
         roler.transform.SetParent(this.transform, false);
-        roler.transform.localPosition = Data.Instance.rolerBornPos_1;//位置读表
-
-        //加载拾取物
-        int collectionNum = 2;//读表
-
-
+        roler.transform.localPosition = Data.Instance.rolerBornPosArray[levelID - 1];//位置读表
 
 
     }
@@ -87,6 +82,8 @@ public class SceneManager : MonoBehaviour
         if (curPassLevelPart > Data.Instance.partCountPerLevel[this.curLevelID - 1])
         {
             Debug.Log("通关");
+            if (Data.Instance.levelCount > curLevelID)
+                Gamer.Instance.StartLevel(curLevelID++);
             return;
         }
         if (this.curLevelID == 1)
