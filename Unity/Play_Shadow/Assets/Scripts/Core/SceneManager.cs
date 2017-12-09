@@ -19,6 +19,8 @@ public class SceneManager : MonoBehaviour
 
 
     public int curLevelID;
+    private int lastLevelID = -1;
+
     private int curPassLevelPart;//当前处于关卡第几段
     private Vector3 curRightPos;//正确摆放位置
     public float curRightEuler;//正确摆放角度
@@ -44,11 +46,9 @@ public class SceneManager : MonoBehaviour
         //销毁上个场景
         if (curSceneLayer != null)
             GameObject.Destroy(curSceneLayer);
-        for (int idx = 0; idx < curLevelPathList.Count; idx++)
-            GameObject.Destroy(curLevelPathList[idx].gameObject);
         if (this.roler != null)
             GameObject.Destroy(roler);
-        for (int idx = 0; idx < curCollectionList.Count; idx++)
+        for (int idx = curCollectionList.Count - 1; idx >= 0; idx--)
             GameObject.Destroy(curCollectionList[idx].gameObject);
 
 
@@ -60,12 +60,19 @@ public class SceneManager : MonoBehaviour
         // sceneLayer.transform.localEulerAngles = Vector3.zero;
 
         //加载该场景的AI路径（itweenpath）
-        curLevelPathList.Clear();
-        for (int levelPart = 1; levelPart <= levelPartCount; levelPart++)
+        if (this.lastLevelID != this.curLevelID)
         {
-            GameObject pathObj = Instantiate(Resources.Load("Path_" + curLevelID + "_" + levelPart)) as GameObject;
-            curLevelPathList.Add(pathObj.GetComponent<iTweenPath>());
+            for (int idx = curLevelPathList.Count - 1; idx >= 0; idx--)
+                GameObject.Destroy(curLevelPathList[idx].gameObject);
+            curLevelPathList.Clear();
+            for (int levelPart = 1; levelPart <= levelPartCount; levelPart++)
+            {
+                Debug.Log(curLevelPathList.Count + "//Path_" + curLevelID + "_" + levelPart);
+                GameObject pathObj = Instantiate(Resources.Load("Path_" + curLevelID + "_" + levelPart)) as GameObject;
+                curLevelPathList.Add(pathObj.GetComponent<iTweenPath>());
+            }
         }
+        this.lastLevelID = this.curLevelID;
 
         //加载主角
         roler = Instantiate(Resources.Load("Roler")) as GameObject;

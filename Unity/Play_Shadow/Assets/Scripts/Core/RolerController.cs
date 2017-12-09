@@ -11,6 +11,10 @@ public class RolerController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+    }
+    void Start()
+    {
         this.anim.animation.Play("stand");
     }
 
