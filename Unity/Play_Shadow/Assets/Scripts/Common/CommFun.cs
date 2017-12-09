@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class CommFun  {
 	private static CommFun _instance;
@@ -19,8 +21,7 @@ public class CommFun  {
 	}
 
 	public Sprite LoadImage(string path){
-		path = string.Format("Assets/Art/Resources/{0}.png",path);
-		Texture2D tex = getAsset(path) as Texture2D;
+		Texture2D tex = Resources.Load<Texture2D>(path);
 		if(tex == null) {
 			return null;
 		}
@@ -28,10 +29,7 @@ public class CommFun  {
 	}
 
 	public AudioClip LoadAudio(string path) {
-//		#if UNITY_EDITOR
-//		return AssetDatabase.LoadAssetAtPath<AudioClip>(Application.dataPath+"/Art/"+path);
-//		#endif
-		return Resources.Load(path, typeof(AudioClip)) as AudioClip;
+		return Resources.Load<AudioClip>(path);
 	}
 
 	public Object getAsset(string path){
@@ -40,7 +38,10 @@ public class CommFun  {
 			return null;
 		}
 		// 编辑器中相对于项目的路径
-		Object asset = AssetDatabase.LoadAssetAtPath<Object>(path);
+		Object asset = null;
+#if UNITY_EDITOR
+		asset = AssetDatabase.LoadAssetAtPath<Object>(path);
+#endif
 		if(asset == null){
 			Debug.LogErrorFormat("检查该资源是否设置AssetBundleName:{0}",path);
 		}
