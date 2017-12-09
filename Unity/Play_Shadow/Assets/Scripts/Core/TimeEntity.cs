@@ -11,13 +11,13 @@ public class TimeEntity : MonoBehaviour
     public Slider mSlider;
     // Use this for initialization
 
-    public float attackTimer;
-    public float attackTime;
+    float attackTimer;
+    float attackTime;
 
     public static TimeEntity Instance;
     void Start()
     {
-		Instance = this;
+        Instance = this;
         attackTimer = 0;
         attackTime = 1.0f;
         curSecond = second;
@@ -42,18 +42,18 @@ public class TimeEntity : MonoBehaviour
     public void Attack()
     {
         //  你要执行的代码 每隔1S执行一次  
-        curSecond--;
-        if (curSecond < 0)
-        {
-            Gamer.Instance.StartLevel(1);
-            return;
-        }
-
         mSlider.value = curSecond / second;
         if (curSecond < 10)
             mtext.text = "00:0" + curSecond;
         else
             mtext.text = "00:" + curSecond;
+
+        curSecond--;
+        if (curSecond < 0)
+        {
+            Gamer.Instance.StartLevel(SceneManager.Instance.curLevelID);
+            return;
+        }
     }
 
     public void ResetTime()

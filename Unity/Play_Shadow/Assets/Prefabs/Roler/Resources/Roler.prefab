@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4599617850797704}
   - component: {fileID: 212959430345221884}
   m_Layer: 0
-  m_Name: Roler (1)
+  m_Name: Roler (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ Transform:
   m_GameObject: {fileID: 1847488752830320}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.11, y: 0.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1.0000306}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1.0000306}
   m_Children: []
   m_Father: {fileID: 4159227035022274}
   m_RootOrder: 0
@@ -78,7 +78,7 @@ CapsuleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1888924560177184}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -172,7 +172,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9caf73bfa3f5b384d8616b7fc531df87, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a2a4a47e3a07d747a29156ffcdad947, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

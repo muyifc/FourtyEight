@@ -22,6 +22,7 @@ public class RolerController : MonoBehaviour
         args.Add("easeType", iTween.EaseType.linear);
         args.Add("movetopath", false);
         args.Add("speed", 50f);
+        // args.Add("time", 5f);
 
         args.Add("onstart", "AnimationStart");
         args.Add("onstartparams", 5.0f);

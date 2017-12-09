@@ -42,6 +42,10 @@ public class Gamer : MonoBehaviour
     //控制关卡流程
     public void StartLevel(int levelID)
     {
+        if (Data.Instance.levelCount < levelID)
+        {
+            return;
+        }
         //生成场景
         SceneManager.Instance.SwitchLevel(levelID);
         LevelLayer.Open("LevelLayer");
