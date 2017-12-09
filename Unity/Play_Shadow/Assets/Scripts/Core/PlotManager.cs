@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class PlotManager : MonoBehaviour {
 	protected static PlotManager _instance = null;
@@ -19,18 +20,22 @@ public class PlotManager : MonoBehaviour {
 	public Button bgBtn;
 	public Text desc;
 	public Image image;
-
+	AudioSource audioSource;
+	CanvasGroup canvas;
 	List<string> descList = new List<string> ();
 	List<string> iconList = new List<string> ();
 	int curId = 0;
+	void Awake(){
+	
+	}
 
 	// Use this for initialization
 	void Start () {
 		string ss = CommLang.plot1;
-		bgBtn = gameObject.transform.Find ("BgBtn").GetComponent<Button> ();
-		image = gameObject.transform.Find ("Image").GetComponent<Image> ();
-		desc = gameObject.transform.Find ("Desc").GetComponent<Text> ();
-
+		bgBtn = gameObject.transform.Find ("Canvas/BgBtn").GetComponent<Button> ();
+		image = gameObject.transform.Find ("Canvas/Image").GetComponent<Image> ();
+		desc = gameObject.transform.Find ("Canvas/Desc").GetComponent<Text> ();
+		audioSource = gameObject.transform.Find ("Audio").GetComponent<AudioSource> ();
 
 		descList.Add (Data.Instance.PlotDesc1);
 		descList.Add (Data.Instance.PlotDesc2);
@@ -40,7 +45,28 @@ public class PlotManager : MonoBehaviour {
 		iconList.Add (Data.Instance.PlotIcon3);
 
 		curId = 0;
-		ShowStory ();
+
+		canvas = gameObject.transform.Find("Canvas").GetComponent<CanvasGroup> ();
+		desc.text = descList [curId];
+		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
+		image.SetNativeSize ();
+		canvas.alpha = 0;
+		Sequence mySeq = DOTween.Sequence ();
+		mySeq.AppendInterval (0.2f);
+		mySeq.Append (DOTween.To (
+			() => {
+				return canvas.alpha;
+			},
+			x => {
+				canvas.alpha = x;	
+			}, 1, 0.6f));
+		
+		mySeq.AppendCallback (()=>{
+			
+			audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio1);
+			Debug.Log("!!!!!!!  加载音频");
+			audioSource.Play();
+		});
 
 		bgBtn.onClick.AddListener (delegate() {
 			NextPlot();		
@@ -48,31 +74,41 @@ public class PlotManager : MonoBehaviour {
 	}
 
 	public void ShowStory(){
-		//		CanvasGroup canvas = getResourceBg.transform.GetComponent<CanvasGroup> ();
-		//		canvas.alpha = 1;
-		//		getResourceBg.gameObject.SetActive (true);
-		//		float posY = getResource.transform.localPosition.y;
-		//		Sequence mySeq = DOTween.Sequence ();
-		//		mySeq.AppendInterval (0.5f);
-		//		mySeq.Append (getResource.transform.DOLocalMoveY( posY + 200,0.3f));
-		//		mySeq.Join (DOTween.To (
-		//			() => {
-		//				return canvas.alpha;
-		//			},
-		//			x => {
-		//				canvas.alpha = x;	
-		//			}, 0, 0.2f));
-		//		mySeq.AppendCallback (() => {
-		//			canvas.alpha = 0;
-		//			showTipObj.SetActive (false);
-		//			getResource.transform.localPosition = new Vector3(getResource.transform.localPosition.x, posY, 0);
-		//		});
+//		CanvasGroup canvas = gameObject.transform.Find("Canvas").GetComponent<CanvasGroup> ();
+		canvas.alpha = 1;
 
+		Sequence mySeq = DOTween.Sequence ();
+		mySeq.Append (DOTween.To (
+			() => {
+				return canvas.alpha;
+			},
+			x => {
+				canvas.alpha = x;	
+			}, 0, 0.8f));
+		mySeq.AppendCallback (() => {
+			canvas.alpha = 0;
+			desc.text = descList [curId];
+			image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
+			image.SetNativeSize ();
 
+			if(curId == 1){
+				audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio2);
+				audioSource.Play();
+			}else if(curId == 2){
+				audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio3);
+				audioSource.Play();
+			}
+		});
 
-		desc.text = descList [curId];
-		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
-		image.SetNativeSize ();
+		mySeq.AppendInterval (0.4f);
+		mySeq.Append (DOTween.To (
+			() => {
+				return canvas.alpha;
+			},
+			x => {
+				canvas.alpha = x;	
+			}, 1, 0.6f));
+
 	}
 
 	public void NextPlot(){
