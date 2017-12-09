@@ -19,7 +19,7 @@ public class CommFun  {
 	}
 
 	public Sprite LoadImage(string path){
-		path = string.Format("Assets/Art/{0}.jpg",path);
+		path = string.Format("Assets/Art/Resources/{0}.png",path);
 		Texture2D tex = getAsset(path) as Texture2D;
 		if(tex == null) {
 			return null;
@@ -27,7 +27,12 @@ public class CommFun  {
 		return Sprite.Create(tex,new Rect(0,0,tex.width,tex.height),new Vector2(0.5f,0.5f));
 	}
 
-
+	public AudioClip LoadAudio(string path) {
+//		#if UNITY_EDITOR
+//		return AssetDatabase.LoadAssetAtPath<AudioClip>(Application.dataPath+"/Art/"+path);
+//		#endif
+		return Resources.Load(path, typeof(AudioClip)) as AudioClip;
+	}
 
 	public Object getAsset(string path){
 		if(!File.Exists(path)){
