@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 222856818263675096}
   - component: {fileID: 114291988608397072}
   - component: {fileID: 114149446750878932}
+  - component: {fileID: 114974522297953012}
   m_Layer: 5
   m_Name: HuaBi
   m_TagString: Untagged
@@ -123,6 +124,7 @@ GameObject:
   - component: {fileID: 222429650337518454}
   - component: {fileID: 114404415030582322}
   - component: {fileID: 114919981099123496}
+  - component: {fileID: 114851646839346350}
   m_Layer: 5
   m_Name: ShaoZi
   m_TagString: Untagged
@@ -837,6 +839,20 @@ MonoBehaviour:
   isCanMove: 0
   isCanRotate: 0
   mShadow: {fileID: 4570112419480138}
+--- !u!114 &114851646839346350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1362897695785676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9172416, b: 1, a: 1}
+  m_EffectDistance: {x: 9.88, y: 0}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114919981099123496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -851,6 +867,20 @@ MonoBehaviour:
   isCanMove: 0
   isCanRotate: 1
   mShadow: {fileID: 4761463671576020}
+--- !u!114 &114974522297953012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1301788352682480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.9172416, b: 1, a: 1}
+  m_EffectDistance: {x: 9.88, y: 0}
+  m_UseGraphicAlpha: 1
 --- !u!212 &212160696243348734
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1272,7 +1302,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -125, y: -252.99997}
+  m_AnchoredPosition: {x: -125, y: 33}
   m_SizeDelta: {x: 149, y: 681}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224179200908902994

@@ -3,18 +3,34 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+public enum ETouchType
+{
+    None,
+    Rotate_At_Touch,
+    Keep_Before,
+}
+
 
 //前景物件
 //拖拽、选装等
 [RequireComponent(typeof(RectTransform))]
-public class ItemEntity : MonoBehaviour, IDragHandler,IEndDragHandler
+public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     public bool isCanMove = false;
     public bool isCanRotate = false;
+    public ETouchType touchType = ETouchType.None;
+
 
     public Transform mShadow;
 
+    private Outline mOutline;
 
+    private Vector3 bornPos;
+    private Vector3 bornAngle;
+    private Vector3 shadowBornPos;
+    private Vector3 shadowBornAngle;
+
+    private Vector3 posOffset;
 
     //update
     public void OnDrag(PointerEventData eventData)
@@ -46,6 +62,15 @@ public class ItemEntity : MonoBehaviour, IDragHandler,IEndDragHandler
         }
     }
 
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        Debug.Log("OnBeginDrag");
+        if (this.touchType == ETouchType.Rotate_At_Touch)
+        {
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, SceneManager.Instance.curRightEuler);
+            this.Refresh();
+        }
+    }
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("OnEndDrag");
@@ -54,6 +79,16 @@ public class ItemEntity : MonoBehaviour, IDragHandler,IEndDragHandler
             // this.gameObject.SetActive(false);
             isCanRotate = false;
             isCanMove = false;
+            this.transform.localScale = Vector3.one;
+            this.mOutline.enabled = false;
+            this.enabled = false;
+        }
+        else
+        {
+            if (touchType != ETouchType.None)
+            {
+                this.Reset();
+            }
         }
     }
 
@@ -62,39 +97,62 @@ public class ItemEntity : MonoBehaviour, IDragHandler,IEndDragHandler
     {
         if (this.mShadow != null)
         {
-            this.transform.localPosition = mShadow.localPosition + Data.Instance.shadowOffset;
-            transform.localEulerAngles = mShadow.localEulerAngles;
+            if (this.touchType == ETouchType.None)
+            {
+                this.transform.localPosition = mShadow.localPosition + Data.Instance.shadowOffset;
+                transform.localEulerAngles = mShadow.localEulerAngles;
+            }
+            else
+            {
+                bornPos = this.transform.localPosition;
+                bornAngle = this.transform.localEulerAngles;
+                shadowBornPos = this.mShadow.localPosition;
+                shadowBornAngle = this.mShadow.localEulerAngles;
+                posOffset = this.transform.localPosition - mShadow.localPosition;
+            }
         }
-        if (!isCanMove && !isCanRotate)
-            this.enabled = false;
 
+
+        if (!isCanMove && !isCanRotate)
+        {
+            this.enabled = false;
+            return;
+        }
+
+        mOutline = transform.GetComponent<Outline>();
+        mOutline.enabled = false;
         // EventTriggerListener.Get(this.gameObject).onClick = SelectEvent;
         // mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;
     }
-    // private void SelectEvent(GameObject go)
-    // {
-    //     LevelLayer.Instance.ShowMenu(this);
-    // }
+
 
     void Refresh()
     {
         mShadow.localEulerAngles = transform.localEulerAngles;
-        mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;
+        if (this.touchType != ETouchType.None)
+            mShadow.localPosition = this.transform.localPosition - this.posOffset;
+        else
+            mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;
+
         //动态监测
         if (SceneManager.Instance.CheckMatching(this.mShadow))
         {
-            this.transform.localScale = Vector3.one * 1.2f;
+            this.transform.localScale = Vector3.one * 1.1f;
+            this.mOutline.enabled = true;
         }
         else
         {
             this.transform.localScale = Vector3.one;
+            this.mOutline.enabled = false;
         }
     }
 
     public void Reset()
     {
-        if (SceneManager.Instance.MatchFun(this.mShadow))
-            this.gameObject.SetActive(false);
+        this.transform.localPosition = bornPos;
+        this.transform.localEulerAngles = bornAngle;
+        this.mShadow.localPosition = shadowBornPos;
+        this.mShadow.localEulerAngles = shadowBornAngle;
     }
     /* 
     public void OnBeginDrag(PointerEventData eventData)

@@ -18,10 +18,10 @@ public class SceneManager : MonoBehaviour
     private List<GameObject> curCollectionList = new List<GameObject>();//拾取物
 
 
-    private int curLevelID;
+    public int curLevelID;
     private int curPassLevelPart;//当前处于关卡第几段
     private Vector3 curRightPos;//正确摆放位置
-    private float curRightEuler;//正确摆放角度
+    public float curRightEuler;//正确摆放角度
     private string curItemEntityName;//需要摆放的物品
 
     public static SceneManager Instance;
@@ -35,6 +35,7 @@ public class SceneManager : MonoBehaviour
     //关卡生成
     public void SwitchLevel(int levelID)
     {
+        Debug.Log("SwitchLevel==" + levelID);
         curLevelID = levelID;
         int levelPartCount = Data.Instance.partCountPerLevel[curLevelID - 1];//读表
         curPassLevelPart = 0;
@@ -82,8 +83,7 @@ public class SceneManager : MonoBehaviour
         if (curPassLevelPart > Data.Instance.partCountPerLevel[this.curLevelID - 1])
         {
             Debug.Log("通关");
-            if (Data.Instance.levelCount > curLevelID)
-                Gamer.Instance.StartLevel(curLevelID++);
+            Gamer.Instance.StartLevel((curLevelID + 1));
             return;
         }
         if (this.curLevelID == 1)
@@ -91,6 +91,12 @@ public class SceneManager : MonoBehaviour
             this.curRightPos = Data.Instance.matchPosArray_1[curPassLevelPart - 1];
             this.curRightEuler = Data.Instance.matchEulerArray_1[curPassLevelPart - 1];
             this.curItemEntityName = Data.Instance.matchItemNameArray_1[curPassLevelPart - 1];
+        }
+        else if (this.curLevelID == 2)
+        {
+            this.curRightPos = Data.Instance.matchPosArray_2[curPassLevelPart - 1];
+            this.curRightEuler = Data.Instance.matchEulerArray_2[curPassLevelPart - 1];
+            this.curItemEntityName = Data.Instance.matchItemNameArray_2[curPassLevelPart - 1];
         }
 
     }
@@ -104,7 +110,7 @@ public class SceneManager : MonoBehaviour
         //匹配正确
         float dis = Vector3.Distance(shadowTran.localPosition, this.curRightPos);
         float angle = Mathf.Abs(shadowTran.localEulerAngles.z - this.curRightEuler);
-        if (dis < 30 && angle < 20 && shadowTran.name.Equals(this.curItemEntityName))
+        if (dis < 60 && angle < 20 && shadowTran.name.Equals(this.curItemEntityName))
             isMatch = true;
         Debug.Log(dis + "//" + angle);
         return isMatch;
