@@ -165,6 +165,8 @@ public class SceneManager : MonoBehaviour
             shadowTran.localEulerAngles = new Vector3(shadowTran.localEulerAngles.x, shadowTran.localEulerAngles.y, this.curRightEuler);
             Debug.Log(this.curLevelPathList.Count + "//" + curPassLevelPart);
             //主角寻路
+            if (mAudio == null)
+                mAudio = transform.GetComponent<AudioSource>();
             this.mAudio.Play();
             RolerController.Instance.AutoMove(this.curLevelPathList[curPassLevelPart - 1]);
         }
