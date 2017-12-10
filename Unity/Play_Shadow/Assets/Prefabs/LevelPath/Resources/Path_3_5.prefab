@@ -9,54 +9,53 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1106708117436642}
+  m_RootGameObject: {fileID: 1003199110538686}
   m_IsPrefabParent: 1
---- !u!1 &1106708117436642
+--- !u!1 &1003199110538686
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4938723827812774}
-  - component: {fileID: 114255175655470708}
-  m_Layer: 5
-  m_Name: Path_3_1
+  - component: {fileID: 4980700614271496}
+  - component: {fileID: 114950648321482700}
+  m_Layer: 0
+  m_Name: Path_3_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4938723827812774
+--- !u!4 &4980700614271496
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1106708117436642}
+  m_GameObject: {fileID: 1003199110538686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 59.296658, y: -9.115288, z: 76.0625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114255175655470708
+--- !u!114 &114950648321482700
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1106708117436642}
+  m_GameObject: {fileID: 1003199110538686}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 270638c3dd2904f79b4f91fb3b56d369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Path_3_1
+  pathName: Path_3_5
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   nodes:
-  - {x: -83.252655, y: 21.151464, z: 88}
-  - {x: -68.063774, y: 21.99437, z: 88}
-  - {x: -55.844017, y: 24.15945, z: 88}
-  nodeCount: 3
+  - {x: 31.095167, y: 14.960953, z: 0}
+  - {x: 72.05387, y: 3.8135757, z: 0}
+  nodeCount: 2
   initialized: 1
   initialName: New Path 1
