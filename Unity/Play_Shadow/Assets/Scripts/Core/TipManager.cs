@@ -9,7 +9,7 @@ public class TipManager : Singleton<TipManager> {
             GameObject.Destroy(currentTip);
         }
         string tip = string.Empty;
-        if(SceneManager.Instance.curLevelID == 1){
+        if(SceneManager.Instance.curLevelID == 2){
             tip = "Tip_01";
         }else{
             if(SceneManager.Instance.curPassLevelPart <=4){
