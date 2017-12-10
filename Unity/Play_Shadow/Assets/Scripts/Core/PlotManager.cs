@@ -46,6 +46,8 @@ public class PlotManager : MonoBehaviour {
 	CanvasGroup canvas;
 	List<string> descList = new List<string> ();
 	List<string> iconList = new List<string> ();
+
+
 	int curId = 0;
 	void Awake(){
 	
@@ -73,6 +75,8 @@ public class PlotManager : MonoBehaviour {
 		canvas = gameObject.transform.Find("Canvas").GetComponent<CanvasGroup> ();
 		desc.text = descList [curId];
 
+
+		AudioManager.Instance.StopMusic ();
 		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
 		image.SetNativeSize ();
 		canvas.alpha = 0;
@@ -91,6 +95,7 @@ public class PlotManager : MonoBehaviour {
 			audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio1);
 			Debug.Log("!!!!!!!  加载音频");
 			audioSource.Play();
+			
 		});
 
 		begin.onClick.AddListener (delegate() {
@@ -200,6 +205,8 @@ public class PlotManager : MonoBehaviour {
 
 	public void Close(){
 		CanvasGroup panelCanvas = gameObject.transform.GetComponent<CanvasGroup> ();
+
+		AudioManager.Instance.PlayMusic ();
 
 		panelCanvas.alpha = 1;
 
