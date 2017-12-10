@@ -37,12 +37,39 @@ public class LevelLayer : LayerManager<LevelLayer>
 
     public void ShowGameOver()
     {
+        PlayEnd();
         Debug.Log("Game Over");
-        mGameOver.SetActive(true);
+        // mGameOver.SetActive(true);
+    }
+
+    void PlayEnd()
+    {
+        Transform qiqiu = transform.parent.Find("SceneManager/Scene_3(Clone)/FrontEntity/QiQiu");
+        Transform qiqiuShadow = transform.parent.Find("SceneManager/Scene_3(Clone)/FrontEntity/QiQiuShadow");
+
+        iTween.RotateAdd(qiqiu.gameObject, new Vector3(0, 0, 180), 2f);
+        iTween.RotateAdd(qiqiuShadow.gameObject, new Vector3(0, 0, 180), 2f);
+
+
+        //iTween.MoveTo(qiqiu.gameObject, iTween.Hash("position", new Vector3(1761, 2200, 0), "time", 5F, "delay", 2F, "islocal", true));
+        iTween.MoveTo(qiqiuShadow.gameObject, iTween.Hash("position", new Vector3(1710, 2200, 0), "time", 5F, "delay", 2F, "islocal", true));
+
+
+        Timer timer1 = new Timer(5, () => { }, () =>
+         {
+             mGameOver.SetActive(true);
+             LevelLayer.Instance.Destroy();
+             SceneManager.Instance.Destroy();
+         }, false);
+    }
+
+    void Flay()
+    {
+
     }
     void GameOverEvent(GameObject obj)
     {
-		LayerManager<HomeLayer>.Open("PlotPanel");
+        LayerManager<HomeLayer>.Open("PlotPanel");
     }
     // Use this for initialization
     void Start()
@@ -61,11 +88,13 @@ public class LevelLayer : LayerManager<LevelLayer>
         // EventTriggerListener.Get(rotateItemMune).onClick = RotateClickEvent;
     }
 
-    void OnDestroy(){
+    void OnDestroy()
+    {
         EventTriggerListener.Get(btnTip).onClick = null;
     }
 
-    private void onTip(GameObject go){
+    private void onTip(GameObject go)
+    {
         TipManager.Instance.Show();
     }
 

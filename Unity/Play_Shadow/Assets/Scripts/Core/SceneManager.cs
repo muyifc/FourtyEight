@@ -35,7 +35,23 @@ public class SceneManager : MonoBehaviour
         Instance = this;
         CommonBG.SetActive(true);
     }
+    public void Destroy()
+    {
+        this.FireLight.gameObject.SetActive(true);
 
+        //销毁上个场景
+        if (curSceneLayer != null)
+            GameObject.Destroy(curSceneLayer);
+        if (this.roler != null)
+            GameObject.Destroy(roler);
+        for (int idx = curCollectionList.Count - 1; idx >= 0; idx--)
+            GameObject.Destroy(curCollectionList[idx].gameObject);
+
+        for (int idx = curLevelPathList.Count - 1; idx >= 0; idx--)
+            GameObject.Destroy(curLevelPathList[idx].gameObject);
+        curLevelPathList.Clear();
+
+    }
     //关卡生成
     public void SwitchLevel(int levelID)
     {
