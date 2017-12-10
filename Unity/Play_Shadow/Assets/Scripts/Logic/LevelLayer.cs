@@ -23,6 +23,9 @@ public class LevelLayer : LayerManager<LevelLayer>
 
     public GameObject mDefeat;
     public GameObject mGameOver;
+
+    private GameObject btnTip;
+
     public void ShowDefeat()
     {
         mDefeat.SetActive(true);
@@ -50,12 +53,21 @@ public class LevelLayer : LayerManager<LevelLayer>
         EventTriggerListener.Get(mDefeat).onClick = DefeatEvent;
         EventTriggerListener.Get(mGameOver).onClick = GameOverEvent;
 
+        btnTip = transform.Find("btnTip").gameObject;
+        EventTriggerListener.Get(btnTip).onClick = onTip;
         // this.itemMenu.SetActive(false);
         // EventTriggerListener.Get(closeItemMune).onClick = CloseEvent;
         // EventTriggerListener.Get(dragItemMune).onClick = DragClickEvent;
         // EventTriggerListener.Get(rotateItemMune).onClick = RotateClickEvent;
     }
 
+    void OnDestroy(){
+        EventTriggerListener.Get(btnTip).onClick = null;
+    }
+
+    private void onTip(GameObject go){
+        TipManager.Instance.Show();
+    }
 
     // private Vector3 dragOffset;
     // private bool isDrag = false;
