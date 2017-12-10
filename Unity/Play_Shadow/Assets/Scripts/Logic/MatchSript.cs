@@ -30,8 +30,8 @@ public class MatchSript : MonoBehaviour
                 isUpdate = true;
                 break;
             case EMatchType.MoveScene:
-                iTween.MoveTo(SceneManager.Instance.curSceneLayer, iTween.Hash("position",
-                 new Vector3(-855, 0, 0), "islocal", true, "time", 3F, "easetype", iTween.EaseType.linear));
+                // iTween.MoveTo(SceneManager.Instance.curSceneLayer, iTween.Hash("position",
+                //  new Vector3(-855, 0, 0), "islocal", true, "time", 3F, "easetype", iTween.EaseType.linear));
 
                 // iTween.MoveTo(SceneManager.Instance.curSceneLayer, iTween.Hash("position",
       			// new Vector3(-855, 0, 0), "islocal", true, "time", 3F, "easetype", iTween.EaseType.linear));

@@ -112,7 +112,11 @@ public class SceneManager : MonoBehaviour
             this.curRightPos = Data.Instance.matchPosArray_3[curPassLevelPart - 1];
             this.curRightEuler = Data.Instance.matchEulerArray_3[curPassLevelPart - 1];
             this.curItemEntityName = Data.Instance.matchItemNameArray_3[curPassLevelPart - 1];
-
+            if (curPassLevelPart == 5)
+            {
+                iTween.MoveTo(SceneManager.Instance.curSceneLayer, iTween.Hash("position",
+                 new Vector3(-855, 0, 0), "islocal", true, "time", 3F, "easetype", iTween.EaseType.linear));
+            }
         }
 
     }

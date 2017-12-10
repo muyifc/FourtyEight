@@ -20,6 +20,7 @@ public class PlotManager : MonoBehaviour {
 	public Button bgBtn;
 	public Text desc;
 	public Image image;
+	public GameObject cover;
 	public Button begin;
 	AudioSource audioSource;
 	CanvasGroup canvas;
@@ -37,6 +38,7 @@ public class PlotManager : MonoBehaviour {
 		image = gameObject.transform.Find ("Canvas/Image").GetComponent<Image> ();
 		desc = gameObject.transform.Find ("Canvas/Desc").GetComponent<Text> ();
 		audioSource = gameObject.transform.Find ("Audio").GetComponent<AudioSource> ();
+		cover = gameObject.transform.Find ("Cover").gameObject;
 		begin = gameObject.transform.Find ("Cover/Button").GetComponent<Button> ();
 
 		descList.Add (Data.Instance.PlotDesc1);
@@ -71,13 +73,53 @@ public class PlotManager : MonoBehaviour {
 		});
 
 		begin.onClick.AddListener (delegate() {
-			NextPlot();
+			StartGame();
 		});
 
 
 		bgBtn.onClick.AddListener (delegate() {
 			NextPlot();		
 		});
+	}
+
+	public void StartGame(){
+		
+		CanvasGroup coverCanvas = cover.GetComponent<CanvasGroup> ();
+
+		coverCanvas.alpha = 1;
+		Sequence mySeq = DOTween.Sequence ();
+		mySeq.Append (DOTween.To (
+			() => {
+				return coverCanvas.alpha;
+			},
+			x => {
+				coverCanvas.alpha = x;	
+			}, 0, 0.8f));
+		mySeq.AppendCallback (() => {
+			cover.SetActive(false);
+			coverCanvas.alpha = 0;
+			desc.text = descList [curId];
+			image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
+			image.SetNativeSize ();
+
+			if(curId == 0){
+				audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio1);
+				audioSource.Play();
+			}
+		});
+
+		canvas.alpha = 0;
+		mySeq.AppendInterval (0.4f);
+		mySeq.Append (DOTween.To (
+			() => {
+				return canvas.alpha;
+			},
+			x => {
+				canvas.alpha = x;	
+			}, 1, 0.6f));
+
+
+
 	}
 
 	public void ShowStory(){
@@ -124,7 +166,7 @@ public class PlotManager : MonoBehaviour {
 	public void NextPlot(){
 		Debug.Log ("!!!!!!!!!!NextPlot");
 		curId++;
-		if (curId >= descList.Count) {
+		if (curId >= iconList.Count) {
 			Close ();
 		} else {
 			ShowStory ();
@@ -132,9 +174,24 @@ public class PlotManager : MonoBehaviour {
 	}
 
 	public void Close(){
-		//继续游戏
-		Gamer.Instance.StartGame();
-		Destroy (gameObject);
+		CanvasGroup panelCanvas = gameObject.transform.GetComponent<CanvasGroup> ();
+
+		panelCanvas.alpha = 1;
+
+		Sequence mySeq = DOTween.Sequence ();
+		mySeq.Append (DOTween.To (
+			() => {
+				return panelCanvas.alpha;
+			},
+			x => {
+				panelCanvas.alpha = x;	
+			}, 0, 1f));
+		mySeq.AppendCallback (() => {
+			//继续游戏
+			Gamer.Instance.StartGame();
+			Destroy (gameObject);
+		});
+
 	}
 	
 	// Update is called once per frame
