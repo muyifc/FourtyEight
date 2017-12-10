@@ -46,5 +46,4 @@ public class Data : Singleton<Data>
     public string PlotAudio1 = "Audio/plot1";
     public string PlotAudio2 = "Audio/plot2";
     public string PlotAudio3 = "Audio/plot3";
-
 }
