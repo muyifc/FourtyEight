@@ -41,7 +41,7 @@ public class MatchSript : MonoBehaviour
 
                 break;
             case EMatchType.Click:
-                EventTriggerListener.Get(this.gameObject).onClick = ClickEvent;
+                //EventTriggerListener.Get(this.gameObject).onClick = ClickEvent;
                 break;
         }
 
@@ -77,13 +77,16 @@ public class MatchSript : MonoBehaviour
         }
     }
 
-    private void ClickEvent(GameObject obj)
+    private bool isOver = false;
+    public void ClickEvent(GameObject obj)
     {
+        bool over = true;
         Transform par = transform.parent.Find("jundao");
         foreach (Transform tran in par)
         {
             if (!tran.gameObject.activeSelf)
             {
+                over = false;
                 tran.gameObject.SetActive(true);
                 break;
             }
@@ -94,10 +97,15 @@ public class MatchSript : MonoBehaviour
         {
             if (!tran.gameObject.activeSelf)
             {
+                over = false;
                 tran.gameObject.SetActive(true);
-                break;
             }
         }
-
+        if (over && !isOver)
+        {
+            isOver = true;
+            Debug.Log("ClickJundao");
+            SceneManager.Instance.MatchFun(this.transform.GetComponent<ItemEntity>().mShadow);
+        }
     }
 }

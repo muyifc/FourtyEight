@@ -18,6 +18,7 @@ public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
 {
     public bool isCanMove = false;
     public bool isCanRotate = false;
+    public bool isClick = false;
     public ETouchType touchType = ETouchType.None;
 
 
@@ -88,6 +89,7 @@ public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
             }
             isCanRotate = false;
             isCanMove = false;
+            isClick = false;
             // this.transform.localScale = Vector3.one;
             this.mOutline.enabled = false;
             this.enabled = false;
@@ -122,16 +124,35 @@ public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
         }
 
 
-        if (!isCanMove && !isCanRotate)
+        if (!isCanMove && !isCanRotate && !isClick)
         {
             this.enabled = false;
             return;
         }
+        if (isClick)
+        {
+            EventTriggerListener.Get(this.gameObject).onClick = clickEvent;
+        }
 
         mOutline = transform.GetComponent<Outline>();
-        mOutline.enabled = false;
+        if (mOutline != null)
+            mOutline.enabled = false;
         // EventTriggerListener.Get(this.gameObject).onClick = SelectEvent;
         // mShadow.localPosition = this.transform.localPosition - Data.Instance.shadowOffset;
+    }
+
+    private void clickEvent(GameObject obj)
+    {
+        isCanRotate = false;
+        isCanMove = false;
+        isClick = false;
+        this.mOutline.enabled = false;
+        this.enabled = false;
+        // this.GetComponent<Image>().raycastTarget = false;
+        if (transform.GetComponent<MatchSript>() != null)
+        {
+            transform.GetComponent<MatchSript>().ClickEvent(null);
+        }
     }
 
 

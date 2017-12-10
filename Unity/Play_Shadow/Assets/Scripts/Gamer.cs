@@ -44,6 +44,7 @@ public class Gamer : MonoBehaviour
     {
         if (Data.Instance.levelCount < levelID)
         {
+            TimeEntity.Instance.gameObject.SetActive(false);
             LevelLayer.Instance.ShowGameOver();
             return;
         }

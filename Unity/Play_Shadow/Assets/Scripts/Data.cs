@@ -13,7 +13,7 @@ public class Data : Singleton<Data>
     //每关几段路
     public int[] partCountPerLevel = { 2, 3, 5 };
     //精灵出生位置
-    public Vector3[] rolerBornPosArray = new Vector3[] { new Vector3(-719, 260, 0), new Vector3(-748, 252, 0), new Vector3(-775, 213, 0) };
+    public Vector3[] rolerBornPosArray = new Vector3[] { new Vector3(-719, 260, 0), new Vector3(-674, 252, 0), new Vector3(-775, 213, 0) };
 
 
 
@@ -24,7 +24,7 @@ public class Data : Singleton<Data>
 
 
     //第二关
-    public Vector3[] matchPosArray_2 = new Vector3[] { new Vector3(-259f, -92f, 0f), new Vector3(-104f, -67f, 0f), new Vector3(400f, 33f, 0f) };
+    public Vector3[] matchPosArray_2 = new Vector3[] { new Vector3(-259f, -92f, 0f), new Vector3(-104f, -67f, 0f), new Vector3(385f, 33f, 0f) };
     public float[] matchEulerArray_2 = new float[] { 35f, 90f, 90f };
     public string[] matchItemNameArray_2 = new string[] { "Cao", "YaoBao", "Dao" };
 
