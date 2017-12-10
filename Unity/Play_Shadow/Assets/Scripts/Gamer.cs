@@ -44,6 +44,7 @@ public class Gamer : MonoBehaviour
     {
         if (Data.Instance.levelCount < levelID)
         {
+            Debug.Log("Game Over");
             return;
         }
         //生成场景
