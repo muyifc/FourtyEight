@@ -33,8 +33,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1925830325247440}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.8, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -84.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,8 +55,9 @@ MonoBehaviour:
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   nodes:
   - {x: -80.422554, y: 24.76035, z: 88}
-  - {x: -56.99639, y: 17.292522, z: 88}
-  - {x: -35.354027, y: 4.241333, z: 88}
-  nodeCount: 3
+  - {x: -61.0944, y: 14.881943, z: 88}
+  - {x: -45.71953, y: 4.7234535, z: 88}
+  - {x: -36.469166, y: 3.3748322, z: 88}
+  nodeCount: 4
   initialized: 1
   initialName: New Path 1
