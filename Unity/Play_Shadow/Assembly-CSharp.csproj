@@ -119,6 +119,7 @@
      <Compile Include="Assets\Scripts\Common\CommFun.cs" />
      <Compile Include="Assets\Scripts\Common\CommLang.cs" />
      <Compile Include="Assets\Scripts\Common\EventTriggerListener.cs" />
+     <Compile Include="Assets\Scripts\Common\LockAxis.cs" />
      <Compile Include="Assets\Scripts\Common\Singleton.cs" />
      <Compile Include="Assets\Scripts\Common\Timer.cs" />
      <Compile Include="Assets\Scripts\Common\UGUIDrag.cs" />

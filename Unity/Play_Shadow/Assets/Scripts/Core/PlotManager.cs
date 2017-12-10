@@ -20,6 +20,7 @@ public class PlotManager : MonoBehaviour {
 	public Button bgBtn;
 	public Text desc;
 	public Image image;
+	public Button begin;
 	AudioSource audioSource;
 	CanvasGroup canvas;
 	List<string> descList = new List<string> ();
@@ -36,6 +37,7 @@ public class PlotManager : MonoBehaviour {
 		image = gameObject.transform.Find ("Canvas/Image").GetComponent<Image> ();
 		desc = gameObject.transform.Find ("Canvas/Desc").GetComponent<Text> ();
 		audioSource = gameObject.transform.Find ("Audio").GetComponent<AudioSource> ();
+		begin = gameObject.transform.Find ("Cover / Button").GetComponent<Button> ();
 
 		descList.Add (Data.Instance.PlotDesc1);
 		descList.Add (Data.Instance.PlotDesc2);
@@ -44,29 +46,34 @@ public class PlotManager : MonoBehaviour {
 		iconList.Add (Data.Instance.PlotIcon2);
 		iconList.Add (Data.Instance.PlotIcon3);
 
-		curId = 0;
+//		curId = 0;
+//
+//		canvas = gameObject.transform.Find("Canvas").GetComponent<CanvasGroup> ();
+//		desc.text = descList [curId];
+//		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
+//		image.SetNativeSize ();
+//		canvas.alpha = 0;
+//		Sequence mySeq = DOTween.Sequence ();
+//		mySeq.AppendInterval (0.2f);
+//		mySeq.Append (DOTween.To (
+//			() => {
+//				return canvas.alpha;
+//			},
+//			x => {
+//				canvas.alpha = x;	
+//			}, 1, 0.6f));
+//		
+//		mySeq.AppendCallback (()=>{
+//			
+//			audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio1);
+//			Debug.Log("!!!!!!!  加载音频");
+//			audioSource.Play();
+//		});
 
-		canvas = gameObject.transform.Find("Canvas").GetComponent<CanvasGroup> ();
-		desc.text = descList [curId];
-		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
-		image.SetNativeSize ();
-		canvas.alpha = 0;
-		Sequence mySeq = DOTween.Sequence ();
-		mySeq.AppendInterval (0.2f);
-		mySeq.Append (DOTween.To (
-			() => {
-				return canvas.alpha;
-			},
-			x => {
-				canvas.alpha = x;	
-			}, 1, 0.6f));
-		
-		mySeq.AppendCallback (()=>{
-			
-			audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio1);
-			Debug.Log("!!!!!!!  加载音频");
-			audioSource.Play();
+		begin.onClick.AddListener (delegate() {
+			NextPlot();
 		});
+
 
 		bgBtn.onClick.AddListener (delegate() {
 			NextPlot();		
@@ -91,7 +98,10 @@ public class PlotManager : MonoBehaviour {
 			image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
 			image.SetNativeSize ();
 
-			if(curId == 1){
+			if(curId == 0){
+				audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio1);
+				audioSource.Play();
+			}else if(curId == 1){
 				audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio2);
 				audioSource.Play();
 			}else if(curId == 2){
