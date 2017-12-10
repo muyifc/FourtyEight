@@ -1,28 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour {
+	public AudioSource music;
 
-	private static AudioManager _instance;
-	public static AudioManager Instance
-	{
-		get
-		{
-			if (_instance == null)
-			{
-				_instance = new AudioManager();
-			}
-			return _instance;
-		}
+
+	public static AudioManager Instance;
+
+	void Awake(){
+		Instance = this;
+		music = gameObject.GetComponent<AudioSource> ();
 	}
 
 	public void StopMusic(){
-		gameObject.transform.GetComponent<AudioSource> ().Stop ();
+		music.Stop ();
 	}
 
 	public void PlayMusic(){
-		gameObject.transform.GetComponent<AudioSource> ().Play ();
+		music.Play ();
 	}
 
 	// Use this for initialization
