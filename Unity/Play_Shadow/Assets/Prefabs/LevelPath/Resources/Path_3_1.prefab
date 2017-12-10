@@ -54,9 +54,9 @@ MonoBehaviour:
   pathName: Path_3_1
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   nodes:
-  - {x: -83.252655, y: 21.151464, z: 88}
+  - {x: -83.252655, y: 22.129168, z: 88}
   - {x: -68.063774, y: 21.99437, z: 88}
-  - {x: -55.844017, y: 24.15945, z: 88}
+  - {x: -55.844017, y: 25.463062, z: 88}
   nodeCount: 3
   initialized: 1
   initialName: New Path 1
