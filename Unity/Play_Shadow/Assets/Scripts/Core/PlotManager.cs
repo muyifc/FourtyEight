@@ -37,7 +37,7 @@ public class PlotManager : MonoBehaviour {
 		image = gameObject.transform.Find ("Canvas/Image").GetComponent<Image> ();
 		desc = gameObject.transform.Find ("Canvas/Desc").GetComponent<Text> ();
 		audioSource = gameObject.transform.Find ("Audio").GetComponent<AudioSource> ();
-		begin = gameObject.transform.Find ("Cover / Button").GetComponent<Button> ();
+		begin = gameObject.transform.Find ("Cover/ Button").GetComponent<Button> ();
 
 		descList.Add (Data.Instance.PlotDesc1);
 		descList.Add (Data.Instance.PlotDesc2);
