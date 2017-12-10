@@ -174,9 +174,24 @@ public class PlotManager : MonoBehaviour {
 	}
 
 	public void Close(){
-		//继续游戏
-		Gamer.Instance.StartGame();
-		Destroy (gameObject);
+		CanvasGroup panelCanvas = gameObject.transform.GetComponent<CanvasGroup> ();
+
+		panelCanvas.alpha = 1;
+
+		Sequence mySeq = DOTween.Sequence ();
+		mySeq.Append (DOTween.To (
+			() => {
+				return panelCanvas.alpha;
+			},
+			x => {
+				panelCanvas.alpha = x;	
+			}, 0, 1f));
+		mySeq.AppendCallback (() => {
+			//继续游戏
+			Gamer.Instance.StartGame();
+			Destroy (gameObject);
+		});
+
 	}
 	
 	// Update is called once per frame
