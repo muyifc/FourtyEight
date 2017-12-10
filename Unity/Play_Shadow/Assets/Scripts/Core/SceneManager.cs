@@ -21,7 +21,7 @@ public class SceneManager : MonoBehaviour
     public int curLevelID;
     private int lastLevelID = -1;
 
-    private int curPassLevelPart;//当前处于关卡第几段
+    public int curPassLevelPart {get;private set;}//当前处于关卡第几段
     private Vector3 curRightPos;//正确摆放位置
     public float curRightEuler;//正确摆放角度
     private string curItemEntityName;//需要摆放的物品

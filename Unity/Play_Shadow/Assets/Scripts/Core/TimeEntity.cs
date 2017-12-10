@@ -51,7 +51,7 @@ public class TimeEntity : MonoBehaviour
         curSecond--;
         if (curSecond < 0)
         {
-            Gamer.Instance.StartLevel(SceneManager.Instance.curLevelID);
+            LevelLayer.Instance.ShowDefeat();
             return;
         }
     }

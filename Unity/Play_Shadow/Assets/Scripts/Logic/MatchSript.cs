@@ -8,6 +8,7 @@ public enum EMatchType
     None,
     FlashChild,
     MoveScene,
+    Click,
 }
 public class MatchSript : MonoBehaviour
 {
@@ -34,10 +35,13 @@ public class MatchSript : MonoBehaviour
                 //  new Vector3(-855, 0, 0), "islocal", true, "time", 3F, "easetype", iTween.EaseType.linear));
 
                 // iTween.MoveTo(SceneManager.Instance.curSceneLayer, iTween.Hash("position",
-      			// new Vector3(-855, 0, 0), "islocal", true, "time", 3F, "easetype", iTween.EaseType.linear));
+                // new Vector3(-855, 0, 0), "islocal", true, "time", 3F, "easetype", iTween.EaseType.linear));
                 // iTween.MoveTo(SceneManager.Instance.curSceneLayer, new Vector3(-855, 0, 0), 4f);
                 // iTween.MoveTo(RolerController.Instance.gameObject, new Vector3(-489.2135f, 208.7463f, -18.70615f), 4f);
 
+                break;
+            case EMatchType.Click:
+                EventTriggerListener.Get(this.gameObject).onClick = ClickEvent;
                 break;
         }
 
@@ -60,9 +64,10 @@ public class MatchSript : MonoBehaviour
 
     public void Tick()
     {
-
+        Debug.Log("Tick...........");
         if (curSecond > 0)
         {
+            curSecond--;
             transform.GetChild(0).gameObject.SetActive(curSecond % 2 == 0);
         }
         else
@@ -70,5 +75,29 @@ public class MatchSript : MonoBehaviour
             isUpdate = false;
             this.enabled = false;
         }
+    }
+
+    private void ClickEvent(GameObject obj)
+    {
+        Transform par = transform.parent.Find("jundao");
+        foreach (Transform tran in par)
+        {
+            if (!tran.gameObject.activeSelf)
+            {
+                tran.gameObject.SetActive(true);
+                break;
+            }
+        }
+
+        Transform spar = transform.parent.parent.Find("Shadows/jundao");
+        foreach (Transform tran in spar)
+        {
+            if (!tran.gameObject.activeSelf)
+            {
+                tran.gameObject.SetActive(true);
+                break;
+            }
+        }
+
     }
 }

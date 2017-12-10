@@ -27,10 +27,10 @@ public class Gamer : MonoBehaviour
         // Timer timer1 = new Timer(3, () => { Debug.Log("alwaysDo"); }, () => { Debug.Log("stopTimer1"); }, true);//每帧执行，到点停止
         // Timer timer2 = new Timer(5, () => { Debug.Log("noAlways"); }, () => { Debug.Log("stopTimer2"); }, false);//到点执行
 
-        Debug.Log(Data.Instance.storty_1);
+        // Debug.Log(Data.Instance.storty_1);
         // LayerManager<HomeLayer>.Open("HomeLayer");
         // HomeLayer.Open("HomeLayer");
-        Gamer.Instance.StartLevel(3);
+        Gamer.Instance.StartLevel(2);
 
     }
 
@@ -44,7 +44,7 @@ public class Gamer : MonoBehaviour
     {
         if (Data.Instance.levelCount < levelID)
         {
-            Debug.Log("Game Over");
+            LevelLayer.Instance.ShowGameOver();
             return;
         }
         //生成场景

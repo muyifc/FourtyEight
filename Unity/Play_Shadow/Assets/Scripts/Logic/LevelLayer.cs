@@ -21,10 +21,36 @@ public class LevelLayer : LayerManager<LevelLayer>
     private ItemEntity targetItem;
     private ItemStatu curStatu = ItemStatu.None;
 
+    public GameObject mDefeat;
+    public GameObject mGameOver;
+    public void ShowDefeat()
+    {
+        mDefeat.SetActive(true);
+    }
+    void DefeatEvent(GameObject obj)
+    {
+        Gamer.Instance.StartLevel(SceneManager.Instance.curLevelID);
+    }
+
+    public void ShowGameOver()
+    {
+        Debug.Log("Game Over");
+        mGameOver.SetActive(true);
+    }
+    void GameOverEvent(GameObject obj)
+    {
+
+    }
     // Use this for initialization
     void Start()
     {
-		// this.itemMenu.SetActive(false);
+        mDefeat.SetActive(false);
+        mGameOver.SetActive(false);
+
+        EventTriggerListener.Get(mDefeat).onClick = DefeatEvent;
+        EventTriggerListener.Get(mGameOver).onClick = GameOverEvent;
+
+        // this.itemMenu.SetActive(false);
         // EventTriggerListener.Get(closeItemMune).onClick = CloseEvent;
         // EventTriggerListener.Get(dragItemMune).onClick = DragClickEvent;
         // EventTriggerListener.Get(rotateItemMune).onClick = RotateClickEvent;
