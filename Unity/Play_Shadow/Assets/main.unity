@@ -158,6 +158,7 @@ MonoBehaviour:
   CommonLight: {fileID: 361324292}
   FireLight: {fileID: 1285686605}
   CommonBG: {fileID: 1369996489}
+  curSceneLayer: {fileID: 0}
   curLevelID: 0
   curRightEuler: 0
 --- !u!224 &125306811 stripped
@@ -380,7 +381,7 @@ Prefab:
     - target: {fileID: 224901781918337416, guid: fdf9a13875c199447a31d631a7ba73cd,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224901781918337416, guid: fdf9a13875c199447a31d631a7ba73cd,
         type: 2}

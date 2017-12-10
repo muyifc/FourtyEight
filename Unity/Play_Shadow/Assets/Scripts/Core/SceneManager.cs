@@ -151,9 +151,4 @@ public class SceneManager : MonoBehaviour
 
         return isMatch;
     }
-
-
-    public void OpenTipLayer(){
-        TipManager.Instance.Show();
-    }
 }

@@ -21,16 +21,25 @@ public class LevelLayer : LayerManager<LevelLayer>
     private ItemEntity targetItem;
     private ItemStatu curStatu = ItemStatu.None;
 
+    private GameObject btnTip;
     // Use this for initialization
     void Start()
     {
-		// this.itemMenu.SetActive(false);
+        btnTip = transform.Find("btnTip").gameObject;
+		EventTriggerListener.Get(btnTip).onClick = onTip;
+        // this.itemMenu.SetActive(false);
         // EventTriggerListener.Get(closeItemMune).onClick = CloseEvent;
         // EventTriggerListener.Get(dragItemMune).onClick = DragClickEvent;
         // EventTriggerListener.Get(rotateItemMune).onClick = RotateClickEvent;
     }
 
+    void OnDestroy(){
+		EventTriggerListener.Get(btnTip).onClick = null;
+    }
 
+    private void onTip(GameObject gameObject){
+        TipManager.Instance.Show();
+    }
     // private Vector3 dragOffset;
     // private bool isDrag = false;
     // private void DragClickEvent(GameObject go)
