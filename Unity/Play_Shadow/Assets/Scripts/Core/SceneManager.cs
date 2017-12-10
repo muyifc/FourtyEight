@@ -13,7 +13,7 @@ public class SceneManager : MonoBehaviour
 
 
     private List<iTweenPath> curLevelPathList = new List<iTweenPath>();//路径
-    private GameObject curSceneLayer;//地图背景
+    public GameObject curSceneLayer;//地图背景
     private GameObject roler;//角色
     private List<GameObject> curCollectionList = new List<GameObject>();//拾取物
 
@@ -69,6 +69,7 @@ public class SceneManager : MonoBehaviour
             {
                 Debug.Log(curLevelPathList.Count + "//Path_" + curLevelID + "_" + levelPart);
                 GameObject pathObj = Instantiate(Resources.Load("Path_" + curLevelID + "_" + levelPart)) as GameObject;
+                pathObj.transform.SetParent(curSceneLayer.transform);
                 curLevelPathList.Add(pathObj.GetComponent<iTweenPath>());
             }
         }
@@ -76,7 +77,7 @@ public class SceneManager : MonoBehaviour
 
         //加载主角
         roler = Instantiate(Resources.Load("Roler")) as GameObject;
-        roler.transform.SetParent(this.transform, false);
+        roler.transform.SetParent(curSceneLayer.transform, false);
         roler.transform.localPosition = Data.Instance.rolerBornPosArray[levelID - 1];//位置读表
 
 
@@ -86,6 +87,7 @@ public class SceneManager : MonoBehaviour
     public void SwitchLevelPart()
     {
         curPassLevelPart++;
+        Debug.Log("下一段路：" + curPassLevelPart);
         //通关
         if (curPassLevelPart > Data.Instance.partCountPerLevel[this.curLevelID - 1])
         {
@@ -104,10 +106,13 @@ public class SceneManager : MonoBehaviour
             this.curRightPos = Data.Instance.matchPosArray_2[curPassLevelPart - 1];
             this.curRightEuler = Data.Instance.matchEulerArray_2[curPassLevelPart - 1];
             this.curItemEntityName = Data.Instance.matchItemNameArray_2[curPassLevelPart - 1];
-        }else if (this.curLevelID == 3){
+        }
+        else if (this.curLevelID == 3)
+        {
             this.curRightPos = Data.Instance.matchPosArray_3[curPassLevelPart - 1];
             this.curRightEuler = Data.Instance.matchEulerArray_3[curPassLevelPart - 1];
             this.curItemEntityName = Data.Instance.matchItemNameArray_3[curPassLevelPart - 1];
+
         }
 
     }
@@ -120,10 +125,10 @@ public class SceneManager : MonoBehaviour
         bool isMatch = false;
         //匹配正确
         float dis = Vector3.Distance(shadowTran.localPosition, this.curRightPos);
-        float angle = (Mathf.Abs(shadowTran.localEulerAngles.z - this.curRightEuler)+360) % 360;
+        float angle = (Mathf.Abs(shadowTran.localEulerAngles.z - this.curRightEuler) + 360) % 360;
         if (dis < 60 && angle < 20 && shadowTran.name.Equals(this.curItemEntityName))
             isMatch = true;
-        Debug.Log("checkMatch:"+shadowTran.name+"//"+dis + "//" + angle);
+        Debug.Log("checkMatch:" + shadowTran.name + "//" + dis + "//" + angle);
         return isMatch;
     }
 

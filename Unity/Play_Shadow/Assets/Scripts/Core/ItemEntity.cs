@@ -60,7 +60,8 @@ public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
         {
             rt.position = globalMousePos;
             LockAxis axis = gameObject.GetComponent<LockAxis>();
-            if(axis != null){
+            if (axis != null)
+            {
                 rt.localPosition = axis.AdjustLockAxis(rt.localPosition);
             }
         }
@@ -68,7 +69,7 @@ public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
+        Debug.Log("OnBeginDrag：" + gameObject.name);
         if (this.touchType == ETouchType.Rotate_At_Touch)
         {
             transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, SceneManager.Instance.curRightEuler);
@@ -81,9 +82,13 @@ public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
         if (SceneManager.Instance.MatchFun(this.mShadow))
         {
             // this.gameObject.SetActive(false);
+            if (transform.GetComponent<MatchSript>() != null)
+            {
+                transform.GetComponent<MatchSript>().DO();
+            }
             isCanRotate = false;
             isCanMove = false;
-            this.transform.localScale = Vector3.one;
+            // this.transform.localScale = Vector3.one;
             this.mOutline.enabled = false;
             this.enabled = false;
         }
@@ -141,12 +146,12 @@ public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
         //动态监测
         if (SceneManager.Instance.CheckMatching(this.mShadow))
         {
-            this.transform.localScale = Vector3.one * 1.1f;
+            // this.transform.localScale = Vector3.one * 1.1f;
             this.mOutline.enabled = true;
         }
         else
         {
-            this.transform.localScale = Vector3.one;
+            // this.transform.localScale = Vector3.one;
             this.mOutline.enabled = false;
         }
     }

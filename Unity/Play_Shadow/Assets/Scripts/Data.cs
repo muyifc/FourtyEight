@@ -11,9 +11,10 @@ public class Data : Singleton<Data>
     //每关几根木柴
     // public int[] collectCountPerLevel = { 1, 2 };
     //每关几段路
-    public int[] partCountPerLevel = { 2, 3,3 };
+    public int[] partCountPerLevel = { 2, 3, 5 };
     //精灵出生位置
-    public Vector3[] rolerBornPosArray = new Vector3[] { new Vector3(-719, 260, 0), new Vector3(-748, 252, 0),new Vector3(-775,121,0) };
+    public Vector3[] rolerBornPosArray = new Vector3[] { new Vector3(-719, 260, 0), new Vector3(-748, 252, 0), new Vector3(-775, 213, 0) };
+
     //位置检索（保存影子位置）
     public Vector3[] matchPosArray_1 = new Vector3[] { new Vector3(-367.5f, 175.9f, 0f), new Vector3(201.7f, 39.47f, 0f) };
     public float[] matchEulerArray_1 = new float[] { 270f, 63.695f };
@@ -23,11 +24,11 @@ public class Data : Singleton<Data>
     public Vector3[] matchPosArray_2 = new Vector3[] { new Vector3(-259f, -92f, 0f), new Vector3(-104f, -67f, 0f), new Vector3(400f, 33f, 0f) };
     public float[] matchEulerArray_2 = new float[] { 35f, 90f, 90f };
     public string[] matchItemNameArray_2 = new string[] { "Cao", "YaoBao", "Dao" };
-    
+
     //第三关
-    public Vector3[] matchPosArray_3 = new Vector3[] { new Vector3(-682, 23f, 0f), new Vector3(-188f, -21f, 0f), new Vector3(0, 283f, 0f) };
-    public float[] matchEulerArray_3 = new float[] { -90f, 0f, 20f };
-    public string[] matchItemNameArray_3 = new string[] { "shoudiantongyingzi", "02_xinglixiangshoubing", "lunzi" };
+    public Vector3[] matchPosArray_3 = new Vector3[] { new Vector3(-655, 83f, 0f), new Vector3(-188f, -21f, 0f), new Vector3(-4.29f, 218.2f, 0f), new Vector3(48f, -45f, 0f), new Vector3(48f, -45f, 0f) };
+    public float[] matchEulerArray_3 = new float[] { -90f, 0f, 61.423f, -55.2f, -55.2f };
+    public string[] matchItemNameArray_3 = new string[] { "shoudiantongyingzi", "02_xinglixiangshoubing", "lunzi", "04_daozi", "04_daozi" };
 
     //剧情
     public string PlotDesc1 = "我看不到自己，却只有在篝火的映照下才能感受到自己微弱的存在。";

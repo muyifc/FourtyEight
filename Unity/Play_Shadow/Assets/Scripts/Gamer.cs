@@ -30,7 +30,7 @@ public class Gamer : MonoBehaviour
         Debug.Log(Data.Instance.storty_1);
         // LayerManager<HomeLayer>.Open("HomeLayer");
         // HomeLayer.Open("HomeLayer");
-        Gamer.Instance.StartLevel(1);
+        Gamer.Instance.StartLevel(3);
 
     }
 
