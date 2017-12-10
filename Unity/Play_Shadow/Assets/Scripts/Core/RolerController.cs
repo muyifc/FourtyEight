@@ -8,6 +8,7 @@ public class RolerController : MonoBehaviour
     public static RolerController Instance;
     private iTweenEvent tweenEvent;
     public UnityArmatureComponent anim;
+    public AudioSource mAudio;
     void Awake()
     {
         Instance = this;
@@ -15,7 +16,7 @@ public class RolerController : MonoBehaviour
     }
     void Start()
     {
-        this.anim.animation.Play("stand");
+        this.anim.animation.Play();
     }
 
     public void AutoMove(iTweenPath path)
@@ -47,13 +48,16 @@ public class RolerController : MonoBehaviour
     //开始移动
     void AnimationStart(float f)
     {
-        this.anim.animation.Play("walk");
+        this.anim.animation.Play();
+        this.mAudio.Play();
         Debug.Log("start :" + f);
     }
     //移动结束
     void AnimationEnd(string f)
     {
-        this.anim.animation.Play("stand");
+        this.anim.animation.Play();
+        this.mAudio.Stop();
+        
         Debug.Log("end : " + f);
         SceneManager.Instance.SwitchLevelPart();
     }

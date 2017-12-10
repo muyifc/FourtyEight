@@ -563,6 +563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCanMove: 1
   isCanRotate: 0
+  isClick: 0
   touchType: 1
   mShadow: {fileID: 4603083434607472}
 --- !u!114 &114291988608397072
@@ -619,6 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCanMove: 0
   isCanRotate: 1
+  isClick: 0
   touchType: 2
   mShadow: {fileID: 4460232308789712}
 --- !u!114 &114353360369689628
@@ -702,6 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCanMove: 1
   isCanRotate: 0
+  isClick: 0
   touchType: 1
   mShadow: {fileID: 4158938994986722}
 --- !u!114 &114481604702184118
@@ -903,6 +906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCanMove: 0
   isCanRotate: 0
+  isClick: 0
   touchType: 0
   mShadow: {fileID: 0}
 --- !u!114 &114947019391019648
@@ -1591,6 +1595,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.18, y: -0.00000095367}
+  m_AnchoredPosition: {x: -0.1800003, y: -0.0000009536743}
   m_SizeDelta: {x: -9.92, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

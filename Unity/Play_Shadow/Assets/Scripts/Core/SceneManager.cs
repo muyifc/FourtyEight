@@ -6,6 +6,8 @@ using System;
 
 public class SceneManager : MonoBehaviour
 {
+    public AudioSource mAudio;
+
     public GameObject CommonLight;
     public GameObject FireLight;
 
@@ -21,7 +23,7 @@ public class SceneManager : MonoBehaviour
     public int curLevelID;
     private int lastLevelID = -1;
 
-    public int curPassLevelPart {get;private set;}//当前处于关卡第几段
+    public int curPassLevelPart { get; private set; }//当前处于关卡第几段
     private Vector3 curRightPos;//正确摆放位置
     public float curRightEuler;//正确摆放角度
     private string curItemEntityName;//需要摆放的物品
@@ -37,6 +39,7 @@ public class SceneManager : MonoBehaviour
     //关卡生成
     public void SwitchLevel(int levelID)
     {
+        this.FireLight.gameObject.SetActive(true);
         Debug.Log("SwitchLevel==" + levelID);
         curLevelID = levelID;
         int levelPartCount = Data.Instance.partCountPerLevel[curLevelID - 1];//读表
@@ -146,6 +149,7 @@ public class SceneManager : MonoBehaviour
             shadowTran.localEulerAngles = new Vector3(shadowTran.localEulerAngles.x, shadowTran.localEulerAngles.y, this.curRightEuler);
             Debug.Log(this.curLevelPathList.Count + "//" + curPassLevelPart);
             //主角寻路
+            this.mAudio.Play();
             RolerController.Instance.AutoMove(this.curLevelPathList[curPassLevelPart - 1]);
         }
 
