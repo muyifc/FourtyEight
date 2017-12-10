@@ -17,6 +17,26 @@ public class PlotManager : MonoBehaviour {
 			return _instance;
 		}
 	}
+
+//	public int delay = 1;
+//	public int Delay {
+//		get{
+//			if (delay == 0) {
+//				return 0;
+//			} else if (delay == 1) {
+//				int a = delay;
+//				StartCoroutine (DelayChange ());
+//				return a;
+//			}
+//			return delay;
+//		}
+//	}
+//
+//	IEnumerator DelayChange(){
+//		yield return new WaitForSeconds (3f);
+//		delay = 0;
+//	}
+
 	public Button bgBtn;
 	public Text desc;
 	public Image image;
@@ -52,6 +72,7 @@ public class PlotManager : MonoBehaviour {
 
 		canvas = gameObject.transform.Find("Canvas").GetComponent<CanvasGroup> ();
 		desc.text = descList [curId];
+
 		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
 		image.SetNativeSize ();
 		canvas.alpha = 0;
@@ -164,6 +185,10 @@ public class PlotManager : MonoBehaviour {
 	}
 
 	public void NextPlot(){
+//		if (Delay == 0) {
+//			delay = 1;
+//			return;
+//		}
 		Debug.Log ("!!!!!!!!!!NextPlot");
 		curId++;
 		if (curId >= iconList.Count) {
@@ -185,7 +210,7 @@ public class PlotManager : MonoBehaviour {
 			},
 			x => {
 				panelCanvas.alpha = x;	
-			}, 0, 1f));
+			}, 0, 1.2f));
 		mySeq.AppendCallback (() => {
 			//继续游戏
 			Gamer.Instance.StartGame();
@@ -196,6 +221,5 @@ public class PlotManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 }
