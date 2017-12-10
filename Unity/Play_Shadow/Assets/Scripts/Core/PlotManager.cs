@@ -46,6 +46,8 @@ public class PlotManager : MonoBehaviour {
 	CanvasGroup canvas;
 	List<string> descList = new List<string> ();
 	List<string> iconList = new List<string> ();
+
+
 	int curId = 0;
 	void Awake(){
 	
@@ -70,28 +72,32 @@ public class PlotManager : MonoBehaviour {
 
 		curId = 0;
 
+		AudioManager.Instance.PlayMusic ();
 		canvas = gameObject.transform.Find("Canvas").GetComponent<CanvasGroup> ();
 		desc.text = descList [curId];
 
-		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
-		image.SetNativeSize ();
-		canvas.alpha = 0;
-		Sequence mySeq = DOTween.Sequence ();
-		mySeq.AppendInterval (0.2f);
-		mySeq.Append (DOTween.To (
-			() => {
-				return canvas.alpha;
-			},
-			x => {
-				canvas.alpha = x;	
-			}, 1, 0.6f));
-		
-		mySeq.AppendCallback (()=>{
-			
-			audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio1);
-			Debug.Log("!!!!!!!  加载音频");
-			audioSource.Play();
-		});
+
+//		AudioManager.Instance.StopMusic ();
+//		image.sprite = CommFun.Instance.LoadImage (iconList [curId]);
+//		image.SetNativeSize ();
+//		canvas.alpha = 0;
+//		Sequence mySeq = DOTween.Sequence ();
+//		mySeq.AppendInterval (0.2f);
+//		mySeq.Append (DOTween.To (
+//			() => {
+//				return canvas.alpha;
+//			},
+//			x => {
+//				canvas.alpha = x;	
+//			}, 1, 0.6f));
+//		
+//		mySeq.AppendCallback (()=>{
+//			
+//			audioSource.clip = CommFun.Instance.LoadAudio(Data.Instance.PlotAudio1);
+//			Debug.Log("!!!!!!!  加载音频");
+//			audioSource.Play();
+//			
+//		});
 
 		begin.onClick.AddListener (delegate() {
 			StartGame();
@@ -104,7 +110,7 @@ public class PlotManager : MonoBehaviour {
 	}
 
 	public void StartGame(){
-		
+		AudioManager.Instance.StopMusic ();
 		CanvasGroup coverCanvas = cover.GetComponent<CanvasGroup> ();
 
 		coverCanvas.alpha = 1;
@@ -200,6 +206,8 @@ public class PlotManager : MonoBehaviour {
 
 	public void Close(){
 		CanvasGroup panelCanvas = gameObject.transform.GetComponent<CanvasGroup> ();
+
+		AudioManager.Instance.PlayMusic ();
 
 		panelCanvas.alpha = 1;
 
