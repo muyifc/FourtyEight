@@ -39,7 +39,7 @@ public class LevelLayer : LayerManager<LevelLayer>
     }
     void GameOverEvent(GameObject obj)
     {
-
+		LayerManager<HomeLayer>.Open("PlotPanel");
     }
     // Use this for initialization
     void Start()
