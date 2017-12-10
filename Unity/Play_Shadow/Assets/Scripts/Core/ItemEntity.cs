@@ -59,6 +59,10 @@ public class ItemEntity : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDr
         eventData.pressEventCamera, out globalMousePos))
         {
             rt.position = globalMousePos;
+            LockAxis axis = gameObject.GetComponent<LockAxis>();
+            if(axis != null){
+                rt.localPosition = axis.AdjustLockAxis(rt.localPosition);
+            }
         }
     }
 
