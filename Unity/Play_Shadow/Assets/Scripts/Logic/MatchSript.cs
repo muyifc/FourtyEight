@@ -99,6 +99,7 @@ public class MatchSript : MonoBehaviour
             {
                 over = false;
                 tran.gameObject.SetActive(true);
+                break;
             }
         }
         if (over && !isOver)
