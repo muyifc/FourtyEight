@@ -159,6 +159,7 @@ MonoBehaviour:
   CommonLight: {fileID: 361324292}
   FireLight: {fileID: 1285686605}
   CommonBG: {fileID: 1369996489}
+  curLevelPathList: []
   curSceneLayer: {fileID: 0}
   curLevelID: 0
   curRightEuler: 0
@@ -370,7 +371,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -670,7 +671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1369996490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -679,7 +680,7 @@ RectTransform:
   m_GameObject: {fileID: 1369996489}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 486.35986}
-  m_LocalScale: {x: 359.15805, y: 9.353087, z: 174.43504}
+  m_LocalScale: {x: 359.15805, y: 9.353087, z: 275.76}
   m_Children: []
   m_Father: {fileID: 58799051}
   m_RootOrder: 0

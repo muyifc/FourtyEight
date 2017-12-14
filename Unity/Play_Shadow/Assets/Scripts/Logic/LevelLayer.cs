@@ -69,6 +69,7 @@ public class LevelLayer : LayerManager<LevelLayer>
     }
     void GameOverEvent(GameObject obj)
     {
+        LevelLayer.Instance.Destroy();
         LayerManager<HomeLayer>.Open("PlotPanel");
     }
     // Use this for initialization

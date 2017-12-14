@@ -5,7 +5,7 @@ using UnityEngine;
 public class Data : Singleton<Data>
 {
     public string storty_1 = "很久很久以前，\n有一个部落";
-
+    public float Ratio;
     public Vector3 shadowOffset = new Vector3(100, -400, 0);
     public int levelCount = 3;
     //每关几根木柴
@@ -29,8 +29,8 @@ public class Data : Singleton<Data>
     public string[] matchItemNameArray_2 = new string[] { "Cao", "YaoBao", "Dao" };
 
     //第三关
-    public Vector3[] matchPosArray_3 = new Vector3[] { new Vector3(-655, 83f, 0f), new Vector3(-188f, -21f, 0f), new Vector3(-4.29f, 218.2f, 0f), new Vector3(48f, -45f, 0f), new Vector3(1073, 91, 0f) };
-    public float[] matchEulerArray_3 = new float[] { -90f, 0f, 61.423f, -55.2f, 0f };
+    public Vector3[] matchPosArray_3 = new Vector3[] { new Vector3(-655, 83f, 0f), new Vector3(157f, 4f, 0f), new Vector3(-6, 156f, 0f), new Vector3(53.6f, 94.1f, 0f), new Vector3(1073, 91, 0f) };
+    public float[] matchEulerArray_3 = new float[] { -90f, 0f, -12f, 19.142f, 0f };
     public string[] matchItemNameArray_3 = new string[] { "shoudiantongyingzi", "02_xinglixiangshoubing", "lunzi", "04_daozi", "JunDao" };
 
 

@@ -42,7 +42,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1539298829554186
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1766394900149874
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +101,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224144402574245664}
+  - component: {fileID: 114690800149159024}
   m_Layer: 0
   m_Name: btnTip
   m_TagString: Untagged
@@ -381,6 +382,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mDefeat: {fileID: 1677299813826660}
   mGameOver: {fileID: 1059798486879668}
+--- !u!114 &114690800149159024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1766394900149874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0aa18f072223f45996ecd8703b027f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xDiff: 0
+  yDiff: 0
 --- !u!114 &114768725770648372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -698,8 +712,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 852, y: 414.3}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 846, y: 409}
+  m_SizeDelta: {x: 117.400024, y: 173.09998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224163275710064594
 RectTransform:

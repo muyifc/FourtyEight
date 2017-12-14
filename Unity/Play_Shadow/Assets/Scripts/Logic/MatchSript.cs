@@ -86,7 +86,6 @@ public class MatchSript : MonoBehaviour
         {
             if (!tran.gameObject.activeSelf)
             {
-                over = false;
                 tran.gameObject.SetActive(true);
                 break;
             }
@@ -97,15 +96,23 @@ public class MatchSript : MonoBehaviour
         {
             if (!tran.gameObject.activeSelf)
             {
-                over = false;
                 tran.gameObject.SetActive(true);
                 break;
             }
         }
+
+        foreach (Transform tran in spar)
+        {
+            if (!tran.gameObject.activeSelf)
+            {
+                over = false;
+            }
+        }
+
+
         if (over && !isOver)
         {
             isOver = true;
-            Debug.Log("ClickJundao");
             SceneManager.Instance.MatchFun(this.transform.GetComponent<ItemEntity>().mShadow);
         }
     }

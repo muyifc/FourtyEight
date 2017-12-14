@@ -55,8 +55,8 @@ MonoBehaviour:
   pathColor: {r: 0, g: 1, b: 1, a: 1}
   nodes:
   - {x: -50, y: 21.6, z: 88}
-  - {x: -1.2, y: 15, z: 88}
-  - {x: 23.23, y: 11.31, z: 88}
+  - {x: 10.453, y: 9.1, z: 88}
+  - {x: 26.6, y: 13.42, z: 88}
   - {x: 50.4, y: 3.166708, z: 88}
   nodeCount: 4
   initialized: 1

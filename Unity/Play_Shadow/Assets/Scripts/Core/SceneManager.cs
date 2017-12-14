@@ -14,7 +14,7 @@ public class SceneManager : MonoBehaviour
     public GameObject CommonBG;
 
 
-    private List<iTweenPath> curLevelPathList = new List<iTweenPath>();//路径
+    public List<iTweenPath> curLevelPathList = new List<iTweenPath>();//路径
     public GameObject curSceneLayer;//地图背景
     private GameObject roler;//角色
     private List<GameObject> curCollectionList = new List<GameObject>();//拾取物
@@ -29,14 +29,24 @@ public class SceneManager : MonoBehaviour
     private string curItemEntityName;//需要摆放的物品
 
     public static SceneManager Instance;
+
     void Awake()
     {
+        float height = Screen.height;
+        float width = Screen.width;
+        Data.Instance.Ratio = ((width / height) / (16.0f / 9.0f));
+        transform.localScale = Vector3.one * Data.Instance.Ratio;
+
         DontDestroyOnLoad(this.gameObject);
         Instance = this;
-        CommonBG.SetActive(true);
+        CommonBG.SetActive(false);
     }
+
+
+
     public void Destroy()
     {
+        CommonBG.SetActive(false);
         this.FireLight.gameObject.SetActive(true);
 
         //销毁上个场景
@@ -55,6 +65,7 @@ public class SceneManager : MonoBehaviour
     //关卡生成
     public void SwitchLevel(int levelID)
     {
+        CommonBG.SetActive(true);
         this.FireLight.gameObject.SetActive(true);
         Debug.Log("SwitchLevel==" + levelID);
         curLevelID = levelID;
@@ -79,27 +90,27 @@ public class SceneManager : MonoBehaviour
         // sceneLayer.transform.localEulerAngles = Vector3.zero;
 
         //加载该场景的AI路径（itweenpath）
-        if (this.lastLevelID != this.curLevelID)
+        // if (this.lastLevelID != this.curLevelID)
+        // {
+        for (int idx = curLevelPathList.Count - 1; idx >= 0; idx--)
+            // GameObject.Destroy(curLevelPathList[idx].gameObject);
+            ResourcePool.Instance.DeSpawn(curLevelPathList[idx].gameObject.name, curLevelPathList[idx].gameObject);
+        curLevelPathList.Clear();
+        for (int levelPart = 1; levelPart <= levelPartCount; levelPart++)
         {
-            for (int idx = curLevelPathList.Count - 1; idx >= 0; idx--)
-                GameObject.Destroy(curLevelPathList[idx].gameObject);
-            curLevelPathList.Clear();
-            for (int levelPart = 1; levelPart <= levelPartCount; levelPart++)
-            {
-                Debug.Log(curLevelPathList.Count + "//Path_" + curLevelID + "_" + levelPart);
-                GameObject pathObj = Instantiate(Resources.Load("Path_" + curLevelID + "_" + levelPart)) as GameObject;
-                pathObj.transform.SetParent(curSceneLayer.transform);
-                curLevelPathList.Add(pathObj.GetComponent<iTweenPath>());
-            }
+            Debug.Log(curLevelPathList.Count + "//Path_" + curLevelID + "_" + levelPart);
+            GameObject pathObj = ResourcePool.Instance.Spawn("Path_" + curLevelID + "_" + levelPart);// Instantiate(Resources.Load("Path_" + curLevelID + "_" + levelPart)) as GameObject;
+            pathObj.transform.SetParent(transform);
+            pathObj.transform.localPosition = new Vector3(pathObj.transform.localPosition.x, pathObj.transform.localPosition.y, 0);
+            curLevelPathList.Add(pathObj.GetComponent<iTweenPath>());
         }
-        this.lastLevelID = this.curLevelID;
+        // }
+        // this.lastLevelID = this.curLevelID;
 
         //加载主角
         roler = Instantiate(Resources.Load("Roler")) as GameObject;
         roler.transform.SetParent(curSceneLayer.transform, false);
-        roler.transform.localPosition = Data.Instance.rolerBornPosArray[levelID - 1];//位置读表
-
-
+        roler.transform.localPosition = Data.Instance.rolerBornPosArray[levelID - 1];//位置读表       
     }
 
     //下一段路

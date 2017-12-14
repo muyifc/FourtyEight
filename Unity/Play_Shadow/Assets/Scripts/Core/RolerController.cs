@@ -26,7 +26,24 @@ public class RolerController : MonoBehaviour
         // args.Add("axis", "x");
         // args.Add("axis", "y");
 
-        args.Add("path", iTweenPath.GetPath(path.pathName));
+        // Vector3[] pathArray = iTweenPath.GetPath(path.pathName);//世界坐标
+        // for (int idx = 0; idx < pathArray.Length; idx++)
+        // {
+        //     pathArray[idx] = new Vector3(pathArray[idx].x * Data.Instance.Ratio, pathArray[idx].y * Data.Instance.Ratio, pathArray[idx].z);
+        //     pathArray[idx].z = path.transform.position.z;
+        // }
+
+        Vector3[] pathArray = iTweenPath.GetPath(path.pathName);//世界坐标
+        // List<Vector3> newPath = new List<Vector3>();
+        for (int idx = 0; idx < pathArray.Length; idx++)
+        {
+            pathArray[idx] = new Vector3(pathArray[idx].x * Data.Instance.Ratio, pathArray[idx].y * Data.Instance.Ratio, path.transform.position.z);
+            // newPath.Add(new Vector3(pathArray[idx].x * Data.Instance.Ratio, pathArray[idx].y * Data.Instance.Ratio, path.transform.position.z));
+        }
+
+
+        args.Add("path", pathArray);
+        args.Add("islocal", false);
         args.Add("easeType", iTween.EaseType.linear);
         args.Add("movetopath", false);
         args.Add("speed", 50f);
@@ -57,7 +74,7 @@ public class RolerController : MonoBehaviour
     {
         this.anim.animation.Play();
         this.mAudio.Stop();
-        
+
         Debug.Log("end : " + f);
         SceneManager.Instance.SwitchLevelPart();
     }
