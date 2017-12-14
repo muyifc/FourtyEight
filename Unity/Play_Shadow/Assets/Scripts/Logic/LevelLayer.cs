@@ -53,10 +53,10 @@ public class LevelLayer : LayerManager<LevelLayer>
 
 
         //iTween.MoveTo(qiqiu.gameObject, iTween.Hash("position", new Vector3(1761, 2200, 0), "time", 5F, "delay", 2F, "islocal", true));
-        iTween.MoveTo(qiqiuShadow.gameObject, iTween.Hash("position", new Vector3(1710, 1200, 0), "time", 15F, "delay", 2F, "islocal", true));
+        iTween.MoveTo(qiqiuShadow.gameObject, iTween.Hash("position", new Vector3(1710, 1000, 0), "time", 5f, "delay", 2F, "islocal", true, "easetype", iTween.EaseType.linear));
 
 
-        Timer timer1 = new Timer(10, () => { }, () =>
+        Timer timer1 = new Timer(7, () => { }, () =>
          {
              mGameOver.SetActive(true);
              SceneManager.Instance.Destroy();

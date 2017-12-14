@@ -11,7 +11,7 @@ public class Data : Singleton<Data>
     //每关几根木柴
     // public int[] collectCountPerLevel = { 1, 2 };
     //每关几段路
-    public int[] partCountPerLevel = { 2, 3, 5 };
+    public int[] partCountPerLevel = { 2, 3, 6 };
     //精灵出生位置
     public Vector3[] rolerBornPosArray = new Vector3[] { new Vector3(-719, 260, 0), new Vector3(-674, 252, 0), new Vector3(-775, 213, 0) };
 

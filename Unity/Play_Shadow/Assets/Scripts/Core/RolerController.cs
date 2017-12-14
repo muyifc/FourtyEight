@@ -19,7 +19,7 @@ public class RolerController : MonoBehaviour
         this.anim.animation.Play();
     }
 
-    public void AutoMove(iTweenPath path)
+    public void AutoMove(iTweenPath path, bool jumpNext = true)
     {
         Debug.Log("GO");
         Hashtable args = new Hashtable();
@@ -56,7 +56,7 @@ public class RolerController : MonoBehaviour
 
         //移动结束时调用，参数和上面类似  
         args.Add("oncomplete", "AnimationEnd");
-        args.Add("oncompleteparams", "end");
+        args.Add("oncompleteparams", jumpNext);
         args.Add("oncompletetarget", gameObject);
 
         iTween.MoveTo(this.gameObject, args);
@@ -70,13 +70,14 @@ public class RolerController : MonoBehaviour
         Debug.Log("start :" + f);
     }
     //移动结束
-    void AnimationEnd(string f)
+    void AnimationEnd(bool f)
     {
         this.anim.animation.Play();
         this.mAudio.Stop();
 
         Debug.Log("end : " + f);
-        SceneManager.Instance.SwitchLevelPart();
+        if (f)
+            SceneManager.Instance.SwitchLevelPart();
     }
 
 }
