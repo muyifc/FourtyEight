@@ -43,19 +43,45 @@ public class LevelLayer : LayerManager<LevelLayer>
         // mGameOver.SetActive(true);
     }
 
+    Transform qiqiuShadow;
     void PlayEnd()
     {
+        //气球旋转
         Transform qiqiu = transform.parent.Find("SceneManager/Scene_3(Clone)/FrontEntity/QiQiu");
-        Transform qiqiuShadow = transform.parent.Find("SceneManager/Scene_3(Clone)/FrontEntity/QiQiuShadow");
+        qiqiuShadow = transform.parent.Find("SceneManager/Scene_3(Clone)/FrontEntity/QiQiuShadow");
 
         iTween.RotateAdd(qiqiu.gameObject, new Vector3(0, 0, 180), 2f);
         iTween.RotateAdd(qiqiuShadow.gameObject, new Vector3(0, 0, 180), 2f);
 
+        Timer timer1 = new Timer(2, () => { }, () =>
+         {
+             this.PlayMove();
+         }, false);
+    }
 
+
+    void PlayMove()
+    {
+        //猪脚移动到气球
+        GameObject pathObj = ResourcePool.Instance.Spawn("Path_3_6");
+        pathObj.transform.SetParent(SceneManager.Instance.transform);
+        pathObj.transform.localPosition = new Vector3(pathObj.transform.localPosition.x, pathObj.transform.localPosition.y, 0);
+        RolerController.Instance.AutoMove(pathObj.GetComponent<iTweenPath>(), false);
+
+        //猪脚变小
+        iTween.ScaleTo(RolerController.Instance.gameObject, iTween.Hash("scale", new Vector3(15, 15, 0), "time", 1f, "delay", 1F, "islocal", true, "easetype", iTween.EaseType.linear));
+
+        Timer timer1 = new Timer(2, () => { }, () =>
+         {
+             this.PlayFly();
+         }, false);
+    }
+
+    void PlayFly()
+    {
         //iTween.MoveTo(qiqiu.gameObject, iTween.Hash("position", new Vector3(1761, 2200, 0), "time", 5F, "delay", 2F, "islocal", true));
-        iTween.MoveTo(qiqiuShadow.gameObject, iTween.Hash("position", new Vector3(1710, 1000, 0), "time", 5f, "delay", 2F, "islocal", true, "easetype", iTween.EaseType.linear));
-
-
+        iTween.MoveTo(qiqiuShadow.gameObject, iTween.Hash("position", new Vector3(1710, 1000, 0), "time", 5f, "islocal", true, "easetype", iTween.EaseType.linear));
+        isFollow = true;
         Timer timer1 = new Timer(7, () => { }, () =>
          {
              mGameOver.SetActive(true);
@@ -63,10 +89,16 @@ public class LevelLayer : LayerManager<LevelLayer>
          }, false);
     }
 
-    void Flay()
+    private bool isFollow;
+    public void Update()
     {
-
+        if (isFollow)
+        {
+            Debug.Log("bye~~");
+            RolerController.Instance.transform.position = qiqiuShadow.transform.position + new Vector3(0.3f, -5f, -1f);
+        }
     }
+
     void GameOverEvent(GameObject obj)
     {
         LevelLayer.Instance.Destroy();
